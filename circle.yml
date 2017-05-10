@@ -1,0 +1,5 @@
+deployment:
+  dev:
+    branch: master
+    commands:
+      - ant -lib apache-commons-net.jar deploy

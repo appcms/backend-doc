@@ -1,5 +1,6 @@
-site_name: Backend
+site_name: 'Backend'
 theme: 'readthedocs'
+version: '1.3.0'
 pages:
 - Infos: 'index.md'
 - Erste Schritte: 'ersteschritte.md'
