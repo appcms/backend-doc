@@ -1,0 +1,10 @@
+site_name: Backend
+theme: 'readthedocs'
+pages:
+- Infos: 'index.md'
+- Erste Schritte: 'ersteschritte.md'
+- Entwicklung:
+    - Setup: 'dev_setup.md'
+    - Entitäten: 'dev_entities.md'
+    - Backend: 'dev_backend.md'
+    - Frontend: 'dev_frontend.md'
