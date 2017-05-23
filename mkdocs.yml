@@ -22,8 +22,8 @@ pages:
 - Allgemein:
     - Einführung: 'index.md'
     - Installation: 'allgemein/installation.md'
-    - Architektur: 'allgemein/architektur.md'
     - Erste Schritte: 'allgemein/ersteschritte.md'
+    - Architektur: 'allgemein/architektur.md'
     - Konsolenbefehle: 'allgemein/konsole.md'
     - Schnittstelle/API: 'allgemein/schnittstelle.md'
 - Entwicklung:
