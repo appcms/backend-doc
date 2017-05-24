@@ -1,4 +1,4 @@
-site_name: 'APP-CMS Backend'
+site_name: 'APP-CMS Server'
 theme: 'material'
 version: '1.3.0'
 extra:
@@ -7,7 +7,7 @@ extra:
     accent: 'red'
   social:
     - type: 'github'
-      link: 'https://github.com/appcms/backend'
+      link: 'https://github.com/appcms/server'
     - type: 'twitter'
       link: 'https://twitter.com/app_agentur'
     - type: 'home'
@@ -27,7 +27,8 @@ pages:
     - Konsolenbefehle: 'allgemein/konsole.md'
     - Schnittstelle/API: 'allgemein/schnittstelle.md'
 - Entwicklung:
-    - Setup: 'entwicklung/setup.md'
+    - Konfiguration: 'entwicklung/setup.md'
     - Entitäten: 'entwicklung/entitaeten.md'
-    - Backend: 'entwicklung/backend.md'
-    - Frontend: 'entwicklung/frontend.md'
+    - Anpassung Backend: 'entwicklung/backend.md'
+    - Anpassung UI: 'entwicklung/frontend.md'
+    - Repository: 'entwicklung/repository.md'

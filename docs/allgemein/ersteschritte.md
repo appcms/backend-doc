@@ -4,9 +4,9 @@
 
 Installieren Sie das APP-CMS nach den entsprechenden [Installations-Anleitungen](installation.md) und rufen Sie im Anschluss das APP-CMS über einen Webbrowser aus.
 
-## Login in das Backend
+## Login in den Server
 
-Nach der Installation können Sie sich mit Benutzername _admin_ und Passwort _admin_ in das Backend einloggen. Vergessen Sie nicht das Passwort nach dem ersten Login abzuändern.
+Nach der Installation können Sie sich mit Benutzername _admin_ und Passwort _admin_ in das APP-CMS UI einloggen. Vergessen Sie nicht das Passwort nach dem ersten Login abzuändern.
 
 ![Login ](../images/screen_login.png)
 

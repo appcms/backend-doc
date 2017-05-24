@@ -4,7 +4,7 @@
 
 **(1) Download eines Release-Paketes**
 
-Laden Sie sich das gewünschte Paket des APP-CMS Backend unter <http://www.das-app-cms.de/download/backend> herunter und entpacken es auf Ihrem Server
+Laden Sie sich das gewünschte Paket des APP-CMS Server unter <http://www.das-app-cms.de/download/server> herunter und entpacken es auf Ihrem Server
 
 **(2) Webserver (Virtual Host) DocumentRoot auf _appcms/public_ stellen**
 
@@ -27,10 +27,10 @@ Nach der Installation können Sie sich mit Benutzernamen=admin und Passwort=admi
 
 ```
 #!/bin/bash
-git clone https://github.com/appcms/backend.git
+git clone https://github.com/appcms/server.git
 ```
 
-Alternativ kann der Quellcode auch als [ZIP-Datei](https://github.com/appcms/backend/archive/master.zip) heruntergeladen und entpackt werden.
+Alternativ kann der Quellcode auch als [ZIP-Datei](https://github.com/appcms/server/archive/master.zip) heruntergeladen und entpackt werden.
 
 **(2) Systemumgebung über Ant-Buildskript[^1] im Root-Ordner[^2] erstellen**
 

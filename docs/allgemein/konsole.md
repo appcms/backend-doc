@@ -30,7 +30,7 @@ whereis php
 ```
 
 !!! Hinweis
-    Für den Aufruf der Konsolenbefehle über das webbasierte Backend muss der entsprechende Befehl in der Konfigurationsdatei unter _SYSTEM_PHP_CLI_COMMAND_ eingetragen werden!
+    Für den Aufruf der Konsolenbefehle über das APP-CMS UI muss der entsprechende Befehl in der Konfigurationsdatei unter _SYSTEM_PHP_CLI_COMMAND_ eingetragen werden!
 
 
 ## Konfiguration

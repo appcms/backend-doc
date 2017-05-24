@@ -1,8 +1,10 @@
-#Architektur APP-CMS
+#Architektur APP-CMS Server
 
 ![Architektur](../images/architektur.png)
 
-## Backend
+## APP-CMS Backend
+
+Die Backend-Schicht des APP-CMS Server basiert auf PHP und MySQL und agiert als _Headless CMS_[^1].
 
 ### Silex Microframework
 Auf der untersten Ebene agiert das Silex Microframework und ist u.a. für Themen wie Routing, 
@@ -51,7 +53,9 @@ des APP-CMS zu verlieren.
 - Erweiterung von System-Entitäen (wie z.B. Benutzer oder Gruppen) durch [Traits](http://php.net/manual/de/language.oop5.traits.php)
 - Individuelle Frontend-Ausgaben über PHP und Twig-Templates (z.B. für eine Landing-Page)
 
-## User Interface (UI)
+## APP-CMS UI
+
+Das APP-CMS UI ist die Benutzeroberfläche für das Backend.
 
 ### AngularJS
 
@@ -67,6 +71,7 @@ Der Code des APP-CMS UI befindet sich im Ordner _appcms/areanet/PIM-UI_, dessen 
 im Ordner _appcms/public/ui/default_ veröffentlicht ist. Das APP-CMS UI lädt nach dem Einloggen über die Schnittstelle _/api/schema_
 die Konfiguration des Systems und generiert dynamisch die Oberfläche, Listen und Formulare.
 
-
 ### Custom
 Ebenso wie das Backend, kann auch das APP-CMS UI individuell angepasst werden.
+
+[^1]: <https://en.wikipedia.org/wiki/Headless_software>

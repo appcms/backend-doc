@@ -7,7 +7,8 @@ Datenbank erfolgt über Doctrine ORM (_Object Relational Mapping_).
 
 !!! tip "Konfiguation der Entitäten"
     Im Doctrine ORM gibt es verschiedene Möglichkeiten die Entitäten zu konfigurieren (z.B. Welche Eigenschaft/Property 
-    in der Entität soll auf welches Datenbank-Feld von welchem Typ gemappt werden?): XML, YAML oder PHP-Annotations. 
+    in der Entität soll auf welches Datenbank-Feld von welchem Typ gemappt werden?): 
+    XML, YAML oder PHP-Annotations. 
     
     Im APP-CMS werden nur PHP-Annotations unterstützt. Doctrine-basierte Annotationen müssen dabei mit _@ORM\_ angesprochen werden:
     
@@ -158,6 +159,8 @@ class Test extends Base
 ...
 ```
 
+Optionen für @PIM\Config:
+
 | Eigenschaft    | Typ    | Standard | Beschreibung                                                                                                                                                                                    |
 |:---------------|:-------|:---------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **label**          | String |          | Name der Entität im APP-CMS UI                                                                                                                                                                  |
@@ -167,19 +170,215 @@ class Test extends Base
 | **labelProperty**  | String |          | Feld, das in den APP-CMS UI Formularen anstatt "Objekt ID bearbeiten" angezeigt werden soll                                                                                                     |
 |      **hide**          |    Boolean    |   false       |   Entität wird nicht in der APP-CMS UI Navigation aufgelistet                                                                                                                                                                                              |
 |      **readonly**          |    Boolean    |   false       |   Entität kann im APP-CMS UI nicht bearbeitet werden                                                                                                                                                                                              |
+| **tabs**                 |     JSON-String    |          |  Optional können die Eigenschaften in den Bearbeitungs-Formularen des APP-CMS UI auf mehrere Tabs aufgeteilt werden: _{'tabKey1' : 'Tab Title 1', 'tabKey2' : 'Tab Title 2'}_                                                                                                                                                                                              |
 
 
 ### Eigenschaften-Annotationen
+
+Anhand den Standard-Doctrine-Annotationen ermitteld das APP-CMS automatisch das passende Formularfeld und Darstellung im APP-CMS UI. 
+
+- Typ _string_ = Einzeiliges Textfeld
+- Typ _text_ = Mehrzeiliges Textfeld
+- Typ _boolean_ = Checkbox
+- ...
+
+Dieses Standard-Verhalten kann aber durch spezielle Annotationen des APP-CMS (_@PIM_) ergänzt und/oder angepasst werden.
+
 #### Allgemein
 ``` hl_lines="4"
 <?php
 /**
-  * @ORM\Column(type="string", unique=false)
+  * @ORM\Column(type="string")
   * @PIM\Config(showInList=40, label="Titel")
   */
 protected $titel;
 ```
-#### Optionale Felder
+Optionen für @PIM\Config:
+
+| Eigenschaft    | Typ     | Standard | Beschreibung                                                                                                                                                                                   |
+|:---------------|:--------|:---------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **label**      | String  |          | Name der Eigenschaft im APP-CMS UI                                                                                                                                                             |
+| **showInList** | Integer |          | Zeigt den Inhalt dieser Eigenschaft in der Auflistung der Entität an der an eingegebenen Position an. Im obigen Beispiel wird die Eigenschaft _titel_ in der Liste in der Spalte 40 angezeigt. |
+| **hide**       | Boolean | false    | Das Formularfeld ist im APP-CMS UI Formular versteckt                                                                                                                                          |
+| **readonly**   | Boolean | false    | Das Formularfeld kann im APP-CMS UI Formular nur gelesen werden                                                                                                                                |
+| **tab**               |   String      |          |       Schlüssel des Tabs, in dem die Eigenschaft optional im APP-CMS UI angezeigt werden soll. Dieser Schlüssel/Key muss in der Klassen-Annotation _@PIM\Config_ in der Option _tabs_ entsprechend konfiguriert sein.                                                                                                                                                                                         |
+
+| **isFilterable** | Boolean | false    | Die Einträge aus dieser Eigenschaft werden als Filter angezeigt                                                                                                                                |
+| **isDatalist**   | Boolean | false    | Rendert eine Filterliste einer Eigenschaft mit _isFilterable=true_ als Auto-Suggest-Feld dar                                                                                                   |
+| **encoded**      | Boolean | false    | Automatische Verschlüsselung der Inhalte in der Datenbank                                                                                                                                      |
+
+!!! note "Hinweis für _isFilterable_"
+    - Bei _join/multijoin/virtualjoin_-Eigenschaften werden die entsprechenden Einträge aus verknüpften Entität geladen
+    - Bei normalen Eigenschaften (z.B. vom Typ _String_) werden alle eindeutigen, gespeicherten Werte aufgelistet
+    - _Select_- und _Boolean_-Felder werden automatisch in den Filtern angezeigt
+
+!!! note "Hinweis für _isDatalist_"
+    Die Option _isDatalist_ ist nur für _join/multijoin_-Eigenschaften vefügbar
+  
+!!! note "Hinweis für _encoded_"
+    - nur für normale Text-Eigenschaften (Type _String_ und _Text_) verfügbar
+    - Konfigurationsvariable _SECURITY_CIPHER_KEY_ muss gesetzt sein.
+    
+#### Pflichtfeld
+
+Das APP-CMS UI erkennt automatisch, ob eine Eigenschaft einen _NULL_-Wert enthalten darf und stellt das gerenderte Formularfeld entsprechend als Pflichtfeld oder optionales Feld dar. Ob eine Eigenschaft einen _NULL_-Wert enthalten darf wird über die Doctrine-Annotation _@ORM\Column_ konfiguriert
+
+```hl_lines="3 9"
+<?php
+/**
+  * @ORM\Column(type="string", nullable=true)
+  * @PIM\Config(showInList=40, label="Kein Pflichtfeld")
+  */
+protected $keinPflichtfeld;
+
+/**
+  * @ORM\Column(type="string", nullable=false)
+  * @PIM\Config(showInList=50, label="Pflichtfeld")
+  */
+protected $pflichtfeld;
+```
+
+!!! note "Hinweis" 
+    Ohne Angabe der Option _nullable_ sind alle Eigenschaften standardmäßig Pflichtfelder!
+
+#### Checkbox
+```
+<?php
+@ORM\Column(type="boolean")
+```
+
+#### Dateiupload 1:n (einfach)
+```
+<?php
+@ORM\ManyToOne(targetEntity="Areanet\PIM\Entity\File")
+@ORM\JoinColumn(onDelete="SET NULL")
+```
+
+#### Dateiupload n:m (mehrfach)
+```
+<?php
+@ORM\ManyToMany(targetEntity="Areanet\PIM\Entity\File")
+@ORM\JoinTable(name="join_table_name", joinColumns={@ORM\JoinColumn(onDelete="CASCADE")})
+```
+
+#### Dateiupload n:m (mehrfach sortierbar)
+
+_TODO_
+
+#### Datum
+```
+<?php
+@ORM\Column(type="datetime")
+```
+
+#### Dezimalzahl
+ 
+```
+<?php
+@ORM\Column(type="decimal", precision=10, scale=2)
+```
+
+#### Entity-Auswahlliste
+
+Listet alle konfiguierten Entitäten in einer Select-Auswahlliste auf:
+ 
+```
+<?php
+@ORM\Column(type="string")
+@PIM\EntitySelector()
+```
+
+#### Ganzzahl
+
+```
+<?php
+@ORM\Column(type="integer")
+```
+
+#### Join 1:1
+
+```
+<?php
+@ORM\OneToOne(targetEntity="Custom\Entity\TARGET_ENTITY")
+@ORM\JoinColumn(onDelete="SET NULL")
+```
+
+#### Join 1:n
+```
+<?php
+@ORM\ManyToOne(targetEntity="Custom\Entity\TARGET_ENTITY")
+@ORM\JoinColumn(onDelete="SET NULL")
+```
+
+#### Join n:m
+```
+<?php
+@ORM\ManyToMany(targetEntity="Custom\Entity\TARGET_ENTITY")
+@ORM\JoinTable(name="join_table_name", joinColumns={@ORM\JoinColumn(onDelete="CASCADE")})
+```
+
+#### Join n:m (Selbstreferenzierend)
+
+```
+<?php
+@ORM\ManyToMany(targetEntity="Custom\Entity\TARGET_ENTITY")
+@ORM\JoinTable(name="join_table_name", joinColumns={@ORM\JoinColumn(onDelete="CASCADE")}, inverseJoinColumns={@ORM\JoinColumn(onDelete="CASCADE", name="REFERENZ_ID", referencedColumnName="id")})
+```
+
+#### Join n:m (sortierbar)
+```
+<?php
+@ORM\OneToMany(targetEntity="Custom\Entity\TARGET_ENTITY_JOIN", mappedBy="join_field_TARGET_ENTITY")
+@PIM\ManyToMany(targetEntity="Custom\Entity\TARGET_ENTITY", mappedBy="join_field_TARGET_ENTITY_JOIN")
+```
+
+####  Textfeld einzeilig
+
+```
+<?php
+@ORM\Column(type="string")
+```
+
+#### Textfeld mehrzeilig
+
+```
+<?php
+@ORM\Column(type="text")
+@PIM\Textarea(lines=10)
+```
+                                                                                                               
+!!! note "Hinweis"
+    Die Annoation _@PIM\Textarea_ ist optional, die Erkennung eines mehrzeiligen Textfeldes erfolgt bereits durch _type="text"_
+
+#### Textfeld mit RTE
+```
+<?php
+@ORM\Column(type="text")
+@PIM\Rte()
+```
+
+#### Select-Feld
+```
+<?php
+@ORM\Column(type="string")
+@PIM\Select(options="VALUE=LABEL, VALUE=LABEL, VALUE=LABEL")
+```
+
+#### Uhrzeit
+
+Standardformat Stunden:Minute
+```
+<?php
+@ORM\Column(type="time")
+```
+
+Benutzerdefiniertes Format, siehe <http://php.net/manual/de/function.date.php>
+```
+<?php
+@ORM\Column(type="time")
+@PIM\Time(format='H:i:s')
+```
+
 # Standard-Entitäten erweitern
 ## User-Entität
 ## File-Entität
