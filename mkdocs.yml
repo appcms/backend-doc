@@ -28,6 +28,6 @@ pages:
     - Schnittstelle/API: 'allgemein/schnittstelle.md'
 - Entwicklung:
     - Setup: 'entwicklung/setup.md'
-    - Entitäten: 'entwicklung/entities.md'
+    - Entitäten: 'entwicklung/entitaeten.md'
     - Backend: 'entwicklung/backend.md'
     - Frontend: 'entwicklung/frontend.md'
