@@ -38,6 +38,8 @@ Die Standard-Entitäten finden Sie im Ordner _appcms/areanet/PIM/Entity_
 - **ThumbnailSetting** Bildgrößen, die automatisch im Dateisystem für
   jede Bilddatei angelegt werden
 
+!!! tip "Anpassung Standard-Entitäten"
+    Die Standard-Entitäten _User_, _Group_, _File_ und Folder_ können durch PHP-Traits erweitert werden, siehe [Anpassung Standard-Entitäten](../backend/standard-entitaeten.md)
 
 ### Benutzerdefinierte Entitäten
 
@@ -241,145 +243,9 @@ protected $pflichtfeld;
 !!! note "Hinweis" 
     Ohne Angabe der Option _nullable_ sind alle Eigenschaften standardmäßig Pflichtfelder!
 
-#### Checkbox
-```
-<?php
-@ORM\Column(type="boolean")
-```
+#### Feldtypen
 
-#### Dateiupload 1:n (einfach)
-```
-<?php
-@ORM\ManyToOne(targetEntity="Areanet\PIM\Entity\File")
-@ORM\JoinColumn(onDelete="SET NULL")
-```
+Das APP-CMS ermittelt aus den angegebenen Annotations automatisch den entsprechenden Feldtyp, also auch wie das Feld im APP-CMS UI im Formular ausgegeben wird. 
 
-#### Dateiupload n:m (mehrfach)
-```
-<?php
-@ORM\ManyToMany(targetEntity="Areanet\PIM\Entity\File")
-@ORM\JoinTable(name="join_table_name", joinColumns={@ORM\JoinColumn(onDelete="CASCADE")})
-```
+* [Auflistung Standard-Feldtypen](standard-feldtypen.md)
 
-#### Dateiupload n:m (mehrfach sortierbar)
-
-_TODO_
-
-#### Datum
-```
-<?php
-@ORM\Column(type="datetime")
-```
-
-#### Dezimalzahl
- 
-```
-<?php
-@ORM\Column(type="decimal", precision=10, scale=2)
-```
-
-#### Entity-Auswahlliste
-
-Listet alle konfiguierten Entitäten in einer Select-Auswahlliste auf:
- 
-```
-<?php
-@ORM\Column(type="string")
-@PIM\EntitySelector()
-```
-
-#### Ganzzahl
-
-```
-<?php
-@ORM\Column(type="integer")
-```
-
-#### Join 1:1
-
-```
-<?php
-@ORM\OneToOne(targetEntity="Custom\Entity\TARGET_ENTITY")
-@ORM\JoinColumn(onDelete="SET NULL")
-```
-
-#### Join 1:n
-```
-<?php
-@ORM\ManyToOne(targetEntity="Custom\Entity\TARGET_ENTITY")
-@ORM\JoinColumn(onDelete="SET NULL")
-```
-
-#### Join n:m
-```
-<?php
-@ORM\ManyToMany(targetEntity="Custom\Entity\TARGET_ENTITY")
-@ORM\JoinTable(name="join_table_name", joinColumns={@ORM\JoinColumn(onDelete="CASCADE")})
-```
-
-#### Join n:m (Selbstreferenzierend)
-
-```
-<?php
-@ORM\ManyToMany(targetEntity="Custom\Entity\TARGET_ENTITY")
-@ORM\JoinTable(name="join_table_name", joinColumns={@ORM\JoinColumn(onDelete="CASCADE")}, inverseJoinColumns={@ORM\JoinColumn(onDelete="CASCADE", name="REFERENZ_ID", referencedColumnName="id")})
-```
-
-#### Join n:m (sortierbar)
-```
-<?php
-@ORM\OneToMany(targetEntity="Custom\Entity\TARGET_ENTITY_JOIN", mappedBy="join_field_TARGET_ENTITY")
-@PIM\ManyToMany(targetEntity="Custom\Entity\TARGET_ENTITY", mappedBy="join_field_TARGET_ENTITY_JOIN")
-```
-
-####  Textfeld einzeilig
-
-```
-<?php
-@ORM\Column(type="string")
-```
-
-#### Textfeld mehrzeilig
-
-```
-<?php
-@ORM\Column(type="text")
-@PIM\Textarea(lines=10)
-```
-                                                                                                               
-!!! note "Hinweis"
-    Die Annoation _@PIM\Textarea_ ist optional, die Erkennung eines mehrzeiligen Textfeldes erfolgt bereits durch _type="text"_
-
-#### Textfeld mit RTE
-```
-<?php
-@ORM\Column(type="text")
-@PIM\Rte()
-```
-
-#### Select-Feld
-```
-<?php
-@ORM\Column(type="string")
-@PIM\Select(options="VALUE=LABEL, VALUE=LABEL, VALUE=LABEL")
-```
-
-#### Uhrzeit
-
-Standardformat Stunden:Minute
-```
-<?php
-@ORM\Column(type="time")
-```
-
-Benutzerdefiniertes Format, siehe <http://php.net/manual/de/function.date.php>
-```
-<?php
-@ORM\Column(type="time")
-@PIM\Time(format='H:i:s')
-```
-
-# Standard-Entitäten erweitern
-## User-Entität
-## File-Entität
-## Folder-Entität

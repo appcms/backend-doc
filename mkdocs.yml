@@ -26,9 +26,20 @@ pages:
     - Architektur: 'allgemein/architektur.md'
     - Konsolenbefehle: 'allgemein/konsole.md'
     - Schnittstelle/API: 'allgemein/schnittstelle.md'
-- Entwicklung:
-    - Konfiguration: 'entwicklung/setup.md'
-    - Entitäten: 'entwicklung/entitaeten.md'
-    - Anpassung Backend: 'entwicklung/backend.md'
-    - Anpassung UI: 'entwicklung/frontend.md'
-    - Repository: 'entwicklung/repository.md'
+- Konfiguration:
+    - System: 'konfiguration/system.md'
+    - Entitäten: 'konfiguration/entitaeten.md'
+    - Standard-Feldtypen: 'konfiguration/standard-feldtypen.md'
+    - Benutzerdefinierte Feldtypen: 'konfiguration/benutzerdefinierte-feldtypen.md'
+- Anpassung Backend:
+    - Events und Hooks: 'backend/events-hooks.md'
+    - Erweiterung Standard-Entitäten: 'backend/standard-entitaeten.md'
+    - Benutzerdefinierte API-Aufrufe: 'backend/api.md'
+    - Benutzerdefinierte Konsolenbefehle: 'backend/konsole.md'
+- Anpassung Frontend:
+  - Anpassung UI: 'ui-frontend/ui.md'
+  - Benutzerdefiniertes Frontend: 'ui-frontend/frontend.md'
+- Datenbankzugriff:
+  - Doctrine Repositories: 'database/repositories.md'
+  - Doctrine DQL: 'database/dql.md'
+  - Doctrine DBAL: 'database/dbal.md'

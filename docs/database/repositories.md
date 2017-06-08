@@ -1,19 +1,22 @@
-h1. Custom-Repository
+# Doctrine Repositories
 
-Standardmäßig kann auf die Entities über das Standard Doctrine-Repository "Doctrine\ORM\EntityRepository":http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/working-with-objects.html#querying zugegriffen werden:
-<pre>
+## Standard Repositories
+Standardmäßig kann auf die Enitäten über das Standard Doctrine-Repository [Doctrine\ORM\EntityRepository](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/working-with-objects.html#querying) zugegriffen werden:
+
+```
+<?php
 $repo = $app['orm.em']->getRepository('Custom\\Entity\\ENTITY_NAME');
 $repo->findAll();
 $repo->findBy...()
-...
-</pre>
- 
-Zu jeder Entity kann aber auch eine eigene Repository-Klasse mit eigenen Abfragen implementiert werden. Dazu muss die Repository-Klasse in der Entity-Annotation bekannt und entsprechend implementiert werden. Die eigene Repository wird dann automatisch bei obigem Aufruf im Hintergrund geladen.
+```
 
-h2. Beispiel
+## Benutzerdefinierte Repositories
+
+Zu jeder Entität kann aber auch eine eigene Repository-Klasse mit eigenen Abfragen implementiert werden. Dazu muss die Repository-Klasse in der Entity-Annotation bekannt und entsprechend implementiert werden. Die eigene Repository wird dann automatisch bei obigem Aufruf im Hintergrund geladen.
 
 _custom/Entity/Test.php_
-<pre>
+```
+<?php
 namespace Custom\Entity;
 
 use Areanet\PIM\Entity\Base;
@@ -29,10 +32,10 @@ class Test extends Base
 {
 ...
 }
-</pre>
+```
 
 _custom/Classes/Repository/TestRepository.php_
-<pre>
+```
 <?php
 namespace Custom\Classes\Repository;
 
@@ -44,10 +47,10 @@ class TestRepository extends EntityRepository{
        ...
     }
 }
+```
 
-</pre>
-
-*Aufruf*
-<pre>
+**Aufruf**
+```
+<?php
 $app['orm.em']->getRepository('Custom\\Entity\\Test')->findByTest();
-</pre>
+```
