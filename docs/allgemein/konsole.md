@@ -83,6 +83,8 @@ Im APP-CMS können auch eigene Konsolenbefehle (z.B. für Daten-Imports oder Rou
 php console.php custom:BEFEHL
 ```
 
+* [Hinzufügen von eigenen Konsolenbefehlen](../backend/konsole.md)
+
 **Eine Auflistung aller konfigurierten Konsolenbefehle erhalten Sie über**
 ```
 #!/bin/bash
