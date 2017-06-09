@@ -24,8 +24,43 @@ unter _appcms/areanet/PIM/Classes/Types_ definiert, die korrespondierende Angula
 ```
 
 ## Dateiupload n:m (mehrfach sortierbar)
+```
+<?php
+@ORM\OneToMany(targetEntity="Custom\Entity\ProductImages", mappedBy="product")
+@PIM\ManyToMany(targetEntity="Areanet\PIM\Entity\File", mappedBy="image")
+protected $images;
+```
 
-_TODO_
+Für sortierbare, verknüpfte Entitäten muss eine "Zwischen-Entität" (vgl. n-m-Join bei einer Datenbank angelegt werden) vom Typ _BaseSortable_ angelegt werden. 
+Die Doctrine Annotatin _@ORM\OneToMany_ ist die eigentlich relevante Konfiguration für die Datenbank. Die Annotation _@PIM\ManyToMany_ dient dem APP-CMS UI dazu, 
+um die Oberfläche korrekt darstellen zu können.
+
+```
+<?php
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="product_images")
+ * @PIM\Config(hide=true)
+ */
+class ProductImages extends Areanet\PIM\Entity\BaseSortable
+{
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Custom\Entity\Product", inversedBy="images")
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    protected $product;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Areanet\PIM\Entity\File")
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     * @PIM\Config(label="Detailbilder", accept="image/*")
+     */
+    protected $image;
+    
+    ...;
+}    
+```
 
 ## Datum
 ```
@@ -90,8 +125,40 @@ Listet alle konfiguierten Entitäten in einer Select-Auswahlliste auf:
 ## Join n:m (sortierbar)
 ```
 <?php
-@ORM\OneToMany(targetEntity="Custom\Entity\TARGET_ENTITY_JOIN", mappedBy="join_field_TARGET_ENTITY")
-@PIM\ManyToMany(targetEntity="Custom\Entity\TARGET_ENTITY", mappedBy="join_field_TARGET_ENTITY_JOIN")
+@ORM\OneToMany(targetEntity="Custom\Entity\ProductNotes", mappedBy="product")
+@PIM\ManyToMany(targetEntity="Custom\Entity\Note", mappedBy="note")
+protected $notes;
+```
+
+Für sortierbare, verknüpfte Entitäten muss eine "Zwischen-Entität" (vgl. n-m-Join bei einer Datenbank angelegt werden) vom Typ _BaseSortable_ angelegt werden. 
+Die Doctrine Annotatin _@ORM\OneToMany_ ist die eigentlich relevante Konfiguration für die Datenbank. Die Annotation _@PIM\ManyToMany_ dient dem APP-CMS UI dazu, 
+um die Oberfläche korrekt darstellen zu können.
+
+```
+<?php
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="product_notes")
+ * @PIM\Config(hide=true)
+ */
+class ProductNotes extends Areanet\PIM\Entity\BaseSortable
+{
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Custom\Entity\Product", inversedBy="notes")
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    protected $product;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Custom\Entity\Note")
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     * @PIM\Config(label="Detailbilder")
+     */
+    protected $note;
+    
+    ...;
+}    
 ```
 
 ##  Textfeld einzeilig
