@@ -45,6 +45,7 @@ Dies wird über den _Areanet\PIM\Classes\Manager\RouteManager_ erreicht, der üb
 
 Über den Befehl _mount_ wird der benutzerdefinierte Controller mit der Basis-Route _custom_ verknüpft und kann über _CustomControllerProvider_ weiter konfiguriert werden.
 
+_custom/app.php_
 ```
 <?php
 $controllerProvider = $app['routeManager']->mount('custom', 'Custom\Controller\TestController');
@@ -59,7 +60,14 @@ $controllerProvider = $app['routeManager']->mount('custom', 'Custom\Controller\T
 
 - Rückgabe: _Areanet\PIM\Classes\Controller\Provider\Base\CustomControllerProvider_
 
+!!! note "Basis-Route"
+    Im obigen Beispiel sind alle im Controller aufgerufenen Aktionen über die Basis-URL _www.domain.de/custom_ erreichbar.
+    
+    **Beachten Sie, dass alle aufrufbaren Aktionen im Controller aber über die folgenden Schritten noch manuell konfiguriert werden müssen!**
+
 ### Controller-Provider
+
+Über den Controller-Provider können die einzelnen URL-Routen zu den Aktionen im Controller konfiguriert werden.
 
 **get($route, $isSecure = false, $action_name = null)**
 
@@ -76,7 +84,10 @@ Hinzufügen einer URL-Route über HTTP-GET.
 ```
 <?php
 $controllerProvider->get('secure', true);
+// Ohne weitere Parameter wird automatisch die Methode _secureAction_
+// in Ihrem benutzerdefinierten Controller aufgerufen.
 ```
+
 
 **post($route, $isSecure = false, $action_name = null)**
 
@@ -112,6 +123,9 @@ Die benutzerdefinierte Schnittstellen sind damit wie folgt zu erreichen:
 - www.domain.de/custom/secure _mit gesetztem X-XSRF-TOKEN Header-Token_
 - www.domain.de/custom/test
 - www.domain.de/hallo/peter
+
+!!! note "Silex URL-Routing"
+    Weitere Informationen zum Routing unter [Silex URL-Routing](https://silex.sensiolabs.org/doc/1.3/usage.html#routing)
 
 ## Zugriff auf Systemfunktionen
 
@@ -173,7 +187,7 @@ Die Helper-Klasse stellt derzeit lediglich eine Methode zur Verfügung.
 
 **getFullEntityName($shortName)**
 
-Gibt aus der Kurzschreibweise (z.B. Produkt oder PIM\User) den kompletten Pfad zurück (z.B. Custom\Entity\Produkt oder Areanet\PIM\Entity\User)
+Gibt aus der Kurzschreibweise (z.B. Produkt oder _PIM\User_) den kompletten Pfad zurück (z.B. _Custom\Entity\Produkt_ oder _Areanet\PIM\Entity\User_)
 
 | Parameter | Typ                                           | Optional | Beschreibung                                                                                         |
 |:----------|:----------------------------------------------|:---------|:-----------------------------------------------------------------------------------------------------|

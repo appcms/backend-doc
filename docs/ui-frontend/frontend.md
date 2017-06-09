@@ -75,9 +75,6 @@ kann die Logik auch in Controller-Klassen ausgelagert werden.
 ### Twig Template Engine
 Die HTML-Templates müssen relativ zum Ordner __/custom/Views__ gespeichert sein und basieren auf der [Twig Template-Engine](http://twig.sensiolabs.org/) und dem [Twig Silex Service Provider](http://silex.sensiolabs.org/doc/providers/twig.html)
 
-!!! note "Routing"
-    Mehr zum Routing finden Sie unter unter [Silex Framework](https://silex.sensiolabs.org/doc/1.3/usage.html).
-    
 
 ### Zugriff auf Systemfunktionen
 
