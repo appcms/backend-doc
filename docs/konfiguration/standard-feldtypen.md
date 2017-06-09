@@ -122,6 +122,18 @@ Listet alle konfiguierten Entitäten in einer Select-Auswahlliste auf:
 @ORM\JoinTable(name="join_table_name", joinColumns={@ORM\JoinColumn(onDelete="CASCADE")}, inverseJoinColumns={@ORM\JoinColumn(onDelete="CASCADE", name="REFERENZ_ID", referencedColumnName="id")})
 ```
 
+!!! note "Beispiel"
+    Es sollen zu Produkten jeweilige Alternativprodukte zugewiesen werden können. Beide Objekte sind jeweils eine Entität von _Custom\Entity\Product_, die intern in der Datenbank in der 
+    Tabelle _product_ abgelegt sind. Bei einem n:m-Join würde Doctrine im Standard eine Tabelle _product_alt_ mit den beiden Feldern _product_id_ (Original-Produkt) und noch einmal
+    _produkt_id_ (Alternaiv-Produkt) anlegen, was zwangsläufig zu einem Datenbankfehler führt.
+    
+    In diesem Fall muss also in der Doctrine Annotation _@ORM\JoinTable_ der Datenbank-Feldname des Alternativ-Produktes name="REFERENZ_ID" entsprechend angepasst werden.
+    
+    ```
+    <?php
+    @ORM\JoinTable(name="join_table_name", joinColumns={@ORM\JoinColumn(onDelete="CASCADE")}, inverseJoinColumns={@ORM\JoinColumn(onDelete="CASCADE", name="alternativprodukt_id", referencedColumnName="id")})
+    ```
+
 ## Join n:m (sortierbar)
 ```
 <?php
