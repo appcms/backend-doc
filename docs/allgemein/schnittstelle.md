@@ -69,4 +69,98 @@ Jeder Token muss einem Benutzer zugeordnet werden. Das Feld _Referrer_ dient als
 
 - [API-Dokumentation](/doku/api/1.3.0)
 
-[^1]: http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html
+## Performance-Tipps
+
+Insbesondere beim Abruf über die List-Methode _api/list_ kann es zu Performance-Problemen kommen, da gegebenfalls sehr viele Daten geladen und zurückgegeben werden müssen. 
+Folgende Tipps sollen bei der Vermeidung solcher Performance-Probleme vermeiden.
+
+### Abruf über flatten=true
+
+In der Regel werden alle verknüpften Objekte (_join, multijoin_) direkt über die API zurückgegeben. Damit werden mehrere API-Aufrufe vermieden. Bei vielen (verknüpften) Objekten 
+kann dies aber zu gewissen Performance-Problemen führen. Zum Einen müssen serverseitig gegebenfalls sehr viele Datenbankaufrufe durchgeführt werden, zum anderen steigt der Aufwand um die Rückgabe 
+entsprechend zu parsen und in das JSON-Format umzuwandeln.
+
+Verwenden Sie daher wenn möglich den Parameter _flatten=true_, damit werden nur die ID's und nicht die kompletten Datensätze der verknüpften Objekte zurückgegeben.
+
+```
+POST: api/list
+
+REQUEST:
+{
+    "entity" : "Kunde",
+    "flatten" : true
+}
+```
+
+### Nur benötigte Eigenschaften laden
+
+Im Standard werden automatisch alle Eigenschaften einer Entität über die Schnittstelle zurückgegeben. Laden Sie daher besser nur die Eigenschaften, die sie auch wirklich benötigen.
+
+```
+POST: api/list
+
+REQUEST:
+{
+    "entity" : "Kunde",
+    "flatten" : true,
+    "properties": ["id", "name", "strasse", "plz", "ort"]
+}
+```
+
+### Server-Komprimierung verwenden
+
+Verwenden und konfigurieren Sie wenn möglich die serverseitige Komprimierung der Daten. 
+
+**Apache-Komprimierung in der .htaccess:**
+```
+ <IfModule mod_deflate.c>
+     AddOutputFilterByType DEFLATE text/css
+     AddOutputFilterByType DEFLATE text/javascript
+     AddOutputFilterByType DEFLATE application/x-javascript
+     AddOutputFilterByType DEFLATE application/javascript
+     AddOutputFilterByType DEFLATE text/x-component
+     AddOutputFilterByType DEFLATE text/html
+     AddOutputFilterByType DEFLATE text/richtext
+     AddOutputFilterByType DEFLATE image/svg+xml
+     AddOutputFilterByType DEFLATE text/plain
+     AddOutputFilterByType DEFLATE text/xsd
+     AddOutputFilterByType DEFLATE text/xsl
+     AddOutputFilterByType DEFLATE text/xml
+     AddOutputFilterByType DEFLATE image/x-icon
+     AddOutputFilterByType DEFLATE application/json
+ </IfModule>
+``` 
+
+### Caching verwenden
+
+Beachten Sie, dass im Debug-Modus kein Caching verwendet wird. Stellen Sie daher im Produktivbetrieb den Debug-Modus ab. Im Standard verwendet das APP-CMS das Dateisystem für das Caching, 
+installieren Sie wenn möglich auf dem Server APC[^1] oder Memcached[^2].
+
+**_custom/config.php_**
+```
+<?php
+   
+use \Areanet\PIM\Classes\Config\Factory;
+$configFactory = Factory::getInstance();
+
+/*
+* Lokaler Server
+*/
+
+$configDefault = new \Areanet\PIM\Classes\Config();
+$configDefault->APP_DEBUG = true
+
+/*
+ * Production Server
+ */
+$configProduction = new \Areanet\PIM\Classes\Config('www.server.com', $configDefault);
+
+$configProduction->APP_DEBUG = false;
+$configProduction->APP_CACHE_DRIVER = 'memcached';  
+//'memcached', 'apc', oder 'filesystem' (Standard)
+
+$configFactory->setConfig($configProduction);
+```
+
+[^1]: http://php.net/manual/de/book.apc.php
+[^2]: http://php.net/manual/de/book.memcached.php
