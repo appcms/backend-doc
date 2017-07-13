@@ -131,9 +131,9 @@ Verwenden und konfigurieren Sie wenn möglich die serverseitige Komprimierung de
  </IfModule>
 ``` 
 
-### Caching verwenden
+### Doctrine-Caching verwenden
 
-Beachten Sie, dass im Debug-Modus kein Caching verwendet wird. Stellen Sie daher im Produktivbetrieb den Debug-Modus ab. Im Standard verwendet das APP-CMS das Dateisystem für das Caching, 
+Beachten Sie, dass im Debug-Modus kein Caching für Doctrine-Abfragen verwendet wird. Stellen Sie daher im Produktivbetrieb den Debug-Modus ab. Im Standard verwendet das APP-CMS das Dateisystem für das Caching, 
 installieren Sie wenn möglich auf dem Server APC[^1] oder Memcached[^2].
 
 **_custom/config.php_**
@@ -160,6 +160,17 @@ $configProduction->APP_CACHE_DRIVER = 'memcached';
 //'memcached', 'apc', oder 'filesystem' (Standard)
 
 $configFactory->setConfig($configProduction);
+```
+
+### Schema-Cache aktivieren
+
+Vergessen Sie im Produktivmodus nicht, den Schema-Cache zu aktivieren - da die Erstellung des Schemas relativ aufwendig ist.
+
+**_custom/config.php_**
+```
+<?php
+
+$configProduction->APP_ENABLE_SCHEMA_CACHE = true;
 ```
 
 [^1]: http://php.net/manual/de/book.apc.php
