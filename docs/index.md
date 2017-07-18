@@ -45,18 +45,18 @@ Mit dem Server können serverseitig beliebige Inhalte gespeichert und verwaltet 
 
 - Apache oder Nginx Webserver
     - mit mod_rewrite Module
+    - FollowSymLinks aktiviert
+    - mod_deflate empfohlen
 - PHP 
     - mindestens Version 5.6
     - Version 7 empfholen
 - PHP-Module
     - open_ssl
-    - gd
+    - gd_lib
     - pdo_mysql
-- Empfohlene PHP-Module
-    - imagick
 - Empfohlene PHP-Einstellungen
-    - exec-Methode erlaubt
     - PHP auch vom der Konsole aufrufbar
+    - OPcache und APC/APCU-Cache
 - MySQL 
     - mindestens Version 5.5
 

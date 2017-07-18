@@ -17,11 +17,12 @@ Nach der Installation können Sie sich mit Benutzernamen=admin und Passwort=admi
     
 !!! tip "Nach der Installation kein Login möglich?"
     Sollte nach der Installtion kein Login möglich sein und ein Datenbankfehler erscheinen, wurde vermutlich die Datenbank nicht korrekt eingerichtet.
-    Führen Sie in diesem Fall bitte aus dem nächsten Kapitel _Manuelle Installation_ die Schritte (3), (4) und (5) aus. Danach müsste das
+    Führen Sie in diesem Fall bitte aus dem nächsten Kapitel _Manuelle Installation/Kompilierung aus Git_ die Schritte (3), (4) und (5) aus. Danach müsste das
     APP-CMS im Browser korrekt funktionieren.
-    
 
-## Manualle Installation aus Git
+   
+
+## Manuelle Installation/Kompilierung aus Git
 
 **(1) Git-Repository laden**
 
@@ -45,7 +46,7 @@ ant
 
 ```
 #!/bin/bash
-php vendor/bin/doctrine orm:schema:update --force
+php console.php orm:schema:update --force
 ```
 
 Beachten Sie die Hinweise zur den [APP-CMS-Konsolenbefehlen](konsole.md)
@@ -82,18 +83,18 @@ Für den Nginx-Webserver entfernen Sie am besten die mitgelieferte _.htaccess-Da
 
 - Apache oder Nginx Webserver
     - mit mod_rewrite Module
+    - FollowSymLinks aktiviert
+    - mod_deflate empfohlen
 - PHP 
     - mindestens Version 5.6
     - Version 7 empfholen
 - PHP-Module
     - open_ssl
-    - gd
+    - gd_lib
     - pdo_mysql
-- Empfohlene PHP-Module
-    - imagick
 - Empfohlene PHP-Einstellungen
-    - exec-Methode erlaubt
     - PHP auch vom der Konsole aufrufbar
+    - OPcache und APC/APCU-Cache
 - MySQL 
     - mindestens Version 5.5
 

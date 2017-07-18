@@ -2,6 +2,16 @@
 
 Im APP-CMS können eigene Konsolen-Befehle erstellt und über die Konsole gestartet werden.
 
+## Konsolen-Befehl anzeigen
+
+Alle verfügbaren Konsolen-Befehle (auch Standard-Befehle wie die von Doctrine) können über folgenden Befehl im Ordner _appcms_ aufgelistet werden:
+
+**/appcms**
+```
+php console.php
+```
+
+
 ## Konsolen-Befehl anlegen
 
 Anlegen eines Befehles unter _custom/Commands/[CommandName].php als abgeleitete Klasse von _Areanet\PIM\Classes\Command\CustomCommand_
