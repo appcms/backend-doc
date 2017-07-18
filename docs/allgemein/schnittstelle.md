@@ -173,5 +173,55 @@ Vergessen Sie im Produktivmodus nicht, den Schema-Cache zu aktivieren - da die E
 $configProduction->APP_ENABLE_SCHEMA_CACHE = true;
 ```
 
+## Datei-Abruf
+
+Hochgeladene Dateien/Bilder werden im APP-CMS außerhalb des Webserver-Verzeichnisses im Ordner _data/files_ gespeichert. Dateien können über folgenden Aufrufen geladen werden:
+
+```
+GET: file/get/ID
+
+```
+
+!!! Note "API-Dokumentation"
+    Weitere mögliche Datei-Abrufe finden Sie in der externen [API-Dokumentation](/doku/api/1.3.0).
+    
+### Abruf per readfile()
+
+Im Standard werden die außerhalb des Webserver-Verzeichnis gespeicherten Dateien per PHP-Funktion _readfile()_ zurückgegeben. Dies kann insbesondere bei größeren Dateien oder 
+vielen Server-Zugriffen zu Performance-Problemen führen. Verwenden Sie in diesem Fall das Apache-Modul _x_sendfile_
+
+### Abruf per x_sendfile
+
+Mit dem Apache-Webserver haben Sie die Möglichkeit anstatt mit _readfile()_ die Dateien über das Modul _x_sendfile_ zurückzugeben. Sie müssen dazu das externe Modul _x_sendfile_ [^3] 
+auf Ihrem Server installieren. Um das Modul zu aktivieren, muss dieses in der Apache- oder VirtualHost-Konfigurationsdatei entsprechend eingerichtet werden.
+
+```
+<VirtualHost *:80>
+    DocumentRoot /var/www/appcms/public
+    ServerName www.appcms-demo.de
+
+    <Directory /var/www/appcms/public>
+        AllowOverride All
+        Options -Indexes FollowSymLinks
+        Order allow,deny
+        Allow from all
+
+        XSendFile On
+        XSendFilePath /var/www/data/files
+    </Directory>
+</VirtualHost>
+
+```
+
+Wenn der Webserver und das Modul korrekt eingerichtet ist, kann die _x_sendfile_-Unterstützung in der Konfigurationsdatei aktiviert werden.
+
+**_custom/config.php_**
+```
+<?php
+
+$configProduction->APP_ENABLE_XSENDFILE = true;
+```
+
 [^1]: http://php.net/manual/de/book.apc.php
 [^2]: http://php.net/manual/de/book.memcached.php
+[^3]: http://tn123.org/mod_xsendfile/
