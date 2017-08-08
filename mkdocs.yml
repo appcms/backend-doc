@@ -36,9 +36,11 @@ pages:
     - Erweiterung Standard-Entitäten: 'backend/standard-entitaeten.md'
     - Benutzerdefinierte API-Aufrufe: 'backend/api.md'
     - Benutzerdefinierte Konsolenbefehle: 'backend/konsole.md'
+    - Benutzerdefinierte Composer Bibliotheken: 'backend/composer.md'
 - Anpassung Frontend:
   - Anpassung UI: 'ui-frontend/ui.md'
   - Benutzerdefiniertes Frontend: 'ui-frontend/frontend.md'
+  - Benutzerdefinierte Composer Bibliotheken: 'backend/composer.md'
 - Datenbankzugriff:
   - Doctrine Repositories: 'database/repositories.md'
   - Doctrine DQL: 'database/dql.md'
