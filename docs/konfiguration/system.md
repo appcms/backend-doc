@@ -68,17 +68,17 @@ An die Klasse _\Areanet\PIM\Classes\Config($serverName, $parentConfig)_ können 
 | **$parentConfig** | Wird _$parentConfig_ angegeben, werden alle Einstellung aus dieser Konfiguration übernommen und können gezielt überschrieben werden.  |
 
 ## Referenz
-### Datenbank
 
-| Eigenschaft          | Typ   | Standard | Beschreibung                                                                                                                                                                                         |
-|:---------------------|:---|:---------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **DB_HOST**          |  String  | --       | Datenbank-Host                                                                                                                                                                                       |
-| **DB_NAME**          |  String  | --       | Datenbank-Name                                                                                                                                                                                       |
-| **DB_USER**          |  String  | --       | Datenbank-Benutzer                                                                                                                                                                                   |
-| **DB_PASS**          |  String  | --       | Datenbank-Passwort                                                                                                                                                                                   |
-| **DB_CHARSET**       |  String  | utf8     | Zeichensatz der Datenbank-Verbindung                                                                                                                                                                 |
-| **DB_NESTED_LEVELS** |  Integer  | 3        | Bis zu welcher Ebene/Tiefe werden untergeordnete Objekte über die API mitausgegeben. Die Anzahl wirkt sich auf die Performance aus (je mehr Ebenen geladen werden, desto schlechter die Performance) |
-| **DB_GUID_STRATEGY** | Boolean   | true     | Neue Objekte werden standardmäßig mit UUIDs als Strings angelegt (Doctrine: _@ORM\GeneratedValue(strategy=UUID)_). Ansonsten werden Integer als Auto-Increment-Werte verwendet (Doctrine: _@ORM\GeneratedValue(strategy=AUTO)_). Nur bei UUIDs ist die automatische Synchronisations mit Clients (z.B. über das iOS- oder Android-SDK) gewährleistet!   |
+
+### Authentifizierung
+
+Das APP-CMS bietet die Möglichkeit die Browser-Verbindung zusätzlich über eine HTTP-Authentifizierung "abzusichern", z.B. für Testumgebungen.
+
+| Eigenschaft         | Typ    | Standard | Beschreibung                                                                              |
+|:--------------------|:-------|:---------|:------------------------------------------------------------------------------------------|
+| **APP_HTTP_AUTH_USER** | String | null     | Benutzername für die HTTP-Authentifizierung                                  |
+| **APP_HTTP_AUTH_PASS** | String | null     | Passwort für die HTTP-Authentifizierung                           |
+
 
 ### Backend
 
@@ -106,6 +106,30 @@ Cross-Origin Resource Sharing: Erlaubt den Zugriff von Webclients über andere D
 | **APP_ALLOW_HEADERS**       | String | content-type, x-xsrf-token          | Erlaubte HTTP-Header für einen CORS-Reques                                                     |
 | **APP_MAX_AGE**       | Integer | 0         | Zeitdauer in der Prefligth-Request bei CORS-Anfragen gecached werden.                                                     |
 
+
+### Dateien
+
+| Eigenschaft               | Typ     | Standard                                            | Beschreibung                                                                                                            |
+|:--------------------------|:--------|:----------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------|
+| **FILE_PROCESSORS**       | Array   | array('\Areanet\PIM\Classes\File\Processing\Image') | Welche Dateiverarbeitungen sind im System registriert. Diese generieren abhängig vom Dateityp z.B. Vorschaubilder. Mitgeliefert werden automatische Bildgenerierungen über _\Areanet\PIM\Classes\File\Processing\Image' für GDLib und _\Areanet\PIM\Classes\File\Processing\ImageMagick_ für ImageMagick    |
+| **FILE_HASH_MUST_UNIQUE** | Boolean | false                                               | Legt fest, ob eine Datei (anhand des Datei-Hashes) nur einmal physikalisch vorhanden sein darf.                         |
+| **FILE_CACHE_LIFETIME**   | Integer | 604800                                              | Laufzeit für den HTTP-Cache bei Dateiabrufen über z.B. _/file/get/12_ in Sekunden - der Standard ist auf 7 Tage gesetzt |
+| **IMAGEMAGICK_EXECUTABLE**                          |       String  |   convert                                                  |             Pfad zum ausführbaren ImageMagick-Befehl auf dem Server, sollte _FILE_PROCESSORS_ auf _array('\Areanet\PIM\Classes\File\Processing\ImageMagick')_ gestellt sein.                                                                                                       |
+
+
+### Datenbank
+
+| Eigenschaft          | Typ   | Standard | Beschreibung                                                                                                                                                                                         |
+|:---------------------|:---|:---------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **DB_HOST**          |  String  | --       | Datenbank-Host                                                                                                                                                                                       |
+| **DB_NAME**          |  String  | --       | Datenbank-Name                                                                                                                                                                                       |
+| **DB_USER**          |  String  | --       | Datenbank-Benutzer                                                                                                                                                                                   |
+| **DB_PASS**          |  String  | --       | Datenbank-Passwort                                                                                                                                                                                   |
+| **DB_CHARSET**       |  String  | utf8     | Zeichensatz der Datenbank-Verbindung                                                                                                                                                                 |
+| **DB_NESTED_LEVELS** |  Integer  | 3        | Bis zu welcher Ebene/Tiefe werden untergeordnete Objekte über die API mitausgegeben. Die Anzahl wirkt sich auf die Performance aus (je mehr Ebenen geladen werden, desto schlechter die Performance) |
+| **DB_GUID_STRATEGY** | Boolean   | true     | Neue Objekte werden standardmäßig mit UUIDs als Strings angelegt (Doctrine: _@ORM\GeneratedValue(strategy=UUID)_). Ansonsten werden Integer als Auto-Increment-Werte verwendet (Doctrine: _@ORM\GeneratedValue(strategy=AUTO)_). Nur bei UUIDs ist die automatische Synchronisations mit Clients (z.B. über das iOS- oder Android-SDK) gewährleistet!   |
+
+
 ### Frontend
 
 | Eigenschaft                            | Typ     | Standard              | Beschreibung                                                                                                                                                                                                                                                                                                                                                                          |
@@ -121,15 +145,6 @@ Cross-Origin Resource Sharing: Erlaubt den Zugriff von Webclients über andere D
 | **FRONTEND_UI**                        | String  | default               | Legt fest, welches Frontend als Benutzeroberfläche geladen werden soll. Standardmäßig ist das das mitgelieferte AngularJS-Frontend im Ordner _default_ im Pfad _public/ui_                                                                                                                                                                                                            |
 | **FRONTEND_LOGIN_REDIRECT**                                      |    String     |       /                | AngularJS-Route, auf die nach dem Login verwiesen wird.                                                                                                                                                                                                                                                                                                                                                                                       |
 
-### Dateien
-
-| Eigenschaft               | Typ     | Standard                                            | Beschreibung                                                                                                            |
-|:--------------------------|:--------|:----------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------|
-| **FILE_PROCESSORS**       | Array   | array('\Areanet\PIM\Classes\File\Processing\Image') | Welche Dateiverarbeitungen sind im System registriert. Diese generieren abhängig vom Dateityp z.B. Vorschaubilder. Mitgeliefert werden automatische Bildgenerierungen über _\Areanet\PIM\Classes\File\Processing\Image' für GDLib und _\Areanet\PIM\Classes\File\Processing\ImageMagick_ für ImageMagick    |
-| **FILE_HASH_MUST_UNIQUE** | Boolean | false                                               | Legt fest, ob eine Datei (anhand des Datei-Hashes) nur einmal physikalisch vorhanden sein darf.                         |
-| **FILE_CACHE_LIFETIME**   | Integer | 604800                                              | Laufzeit für den HTTP-Cache bei Dateiabrufen über z.B. _/file/get/12_ in Sekunden - der Standard ist auf 7 Tage gesetzt |
-| **IMAGEMAGICK_EXECUTABLE**                          |       String  |   convert                                                  |             Pfad zum ausführbaren ImageMagick-Befehl auf dem Server, sollte _FILE_PROCESSORS_ auf _array('\Areanet\PIM\Classes\File\Processing\ImageMagick')_ gestellt sein.                                                                                                       |
-
 ### Push-Notifcations
 
 | Eigenschaft         | Typ    | Standard | Beschreibung                                                                              |
@@ -140,16 +155,15 @@ Cross-Origin Resource Sharing: Erlaubt den Zugriff von Webclients über andere D
 
 ### Sicherheit
 
-Nur relevant, wenn String-/Text-Properties mit der Option encoded = true konfiguriert sind.
+| Eigenschaft         | Typ    | Standard | Beschreibung                                                                              |
+|:--------------------|:-------|:---------|:------------------------------------------------------------------------------------------|
+| **APP_FORCE_SSL** | Boolean | false     | Erzwingt eine SSL-Verbindung, bzw. leitet http-Aufrufe automatisch auf https um.                        |
+
+
+Folgende Einstellungen sind nur relevant, wenn String-/Text-Properties mit der Option encoded = true konfiguriert sind.
 
 | Eigenschaft         | Typ    | Standard | Beschreibung                                                                              |
 |:--------------------|:-------|:---------|:------------------------------------------------------------------------------------------|
 | **SECURITY_CIPHER_KEY** | String |      | Wenn Verschlüsselung bei Textfeldern verwendet wird, muss ein Schlüssel/Passwort zwingend gesetzt und darf im nachhinein nicht mehr geändert werden!                           |
 | **SECURITY_CIPHER_METHOD** | String | AES-128-ECB     | Verschlüsselungsmethode, sollte nicht geändert werden                                |
-
-### Konsole
-
-| Eigenschaft         | Typ    | Standard | Beschreibung                                                                              |
-|:--------------------|:-------|:---------|:------------------------------------------------------------------------------------------|
-| **SYSTEM_PHP_CLI_COMMAND** | String | php     | Pfad zur ausführbaren CLI-Variante von PHP auf dem Server.                                 |
 

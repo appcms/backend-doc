@@ -64,6 +64,8 @@ $controllerProvider = $app['routeManager']->mount('custom', 'Custom\Controller\T
     Im obigen Beispiel sind alle im Controller aufgerufenen Aktionen über die Basis-URL _www.domain.de/custom_ erreichbar.
     
     **Beachten Sie, dass alle aufrufbaren Aktionen im Controller aber über die folgenden Schritten noch manuell konfiguriert werden müssen!**
+    
+    **Die "Basic-Route" $baseRoute muss eindeutig sein!
 
 ### Controller-Provider
 

@@ -6,28 +6,39 @@ unter _appcms/areanet/PIM/Classes/Types_ definiert, die korrespondierende Angula
 ## Checkbox
 ```
 <?php
-@ORM\Column(type="boolean")
+/**
+ * @ORM\Column(type="boolean")
+ */
+protected $checkboxProperty;
 ```
 
 ## Dateiupload 1:n (einfach)
 ```
 <?php
-@ORM\ManyToOne(targetEntity="Areanet\PIM\Entity\File")
-@ORM\JoinColumn(onDelete="SET NULL")
+/**
+ * @ORM\ManyToOne(targetEntity="Areanet\PIM\Entity\File")
+ * @ORM\JoinColumn(onDelete="SET NULL")
+ */
+protected $images;
 ```
 
 ## Dateiupload n:m (mehrfach)
 ```
 <?php
-@ORM\ManyToMany(targetEntity="Areanet\PIM\Entity\File")
-@ORM\JoinTable(name="join_table_name", joinColumns={@ORM\JoinColumn(onDelete="CASCADE")})
+/**
+ * @ORM\ManyToMany(targetEntity="Areanet\PIM\Entity\File")
+ * @ORM\JoinTable(name="join_table_name", joinColumns={@ORM\JoinColumn(onDelete="CASCADE")})
+ */
+protected $images;
 ```
 
 ## Dateiupload n:m (mehrfach sortierbar)
 ```
 <?php
-@ORM\OneToMany(targetEntity="Custom\Entity\ProductImages", mappedBy="product")
-@PIM\ManyToMany(targetEntity="Areanet\PIM\Entity\File", mappedBy="image")
+/**
+ * @ORM\OneToMany(targetEntity="Custom\Entity\ProductImages", mappedBy="product")
+ * @PIM\ManyToMany(targetEntity="Areanet\PIM\Entity\File", mappedBy="image")
+ */
 protected $images;
 ```
 
@@ -65,14 +76,20 @@ class ProductImages extends Areanet\PIM\Entity\BaseSortable
 ## Datum
 ```
 <?php
-@ORM\Column(type="datetime")
+/**
+ * @ORM\Column(type="datetime")
+*/
+protected $datetimeProperty;
 ```
 
 ## Dezimalzahl
  
 ```
 <?php
-@ORM\Column(type="decimal", precision=10, scale=2)
+/**
+ * @ORM\Column(type="decimal", precision=10, scale=2)
+*/
+protected $decimalProperty;
 ```
 
 ## Entity-Auswahlliste
@@ -81,45 +98,90 @@ Listet alle konfiguierten Entitäten in einer Select-Auswahlliste auf:
  
 ```
 <?php
-@ORM\Column(type="string")
-@PIM\EntitySelector()
+/**
+ * @ORM\Column(type="string")
+ * @PIM\EntitySelector()
+*/
+protected $entitySelectorProperty;
 ```
 
 ## Ganzzahl
 
 ```
 <?php
-@ORM\Column(type="integer")
+/**
+ * @ORM\Column(type="integer")
+ */
+protected $integerProperty;
 ```
 
 ## Join 1:1
 
 ```
 <?php
-@ORM\OneToOne(targetEntity="Custom\Entity\TARGET_ENTITY")
-@ORM\JoinColumn(onDelete="SET NULL")
+/**
+ * @ORM\OneToOne(targetEntity="Custom\Entity\TARGET_ENTITY")
+ * @ORM\JoinColumn(onDelete="SET NULL")
+*/
+protected $targetObject;
 ```
 
 ## Join 1:n
+
+**Custom\Entity\SOURCE_ENTITY**
 ```
 <?php
-@ORM\ManyToOne(targetEntity="Custom\Entity\TARGET_ENTITY")
-@ORM\JoinColumn(onDelete="SET NULL")
+/**
+ * @ORM\ManyToOne(targetEntity="Custom\Entity\TARGET_ENTITY")
+ * @ORM\JoinColumn(onDelete="SET NULL")
+*/
+protected $targetObject;
 ```
 
-## Join n:m
+**Bidirektional in Custom\Entity\TARGET_ENTITY**
+
+Bei einer bidirektionalen Verbindung wird in der Datenbank-Tabelle der TARGET_ENTITY kein Feld angelegt, die Verbindung ist lediglich "virtuell" in Doctrine vorhanden.
+
 ```
 <?php
-@ORM\ManyToMany(targetEntity="Custom\Entity\TARGET_ENTITY")
-@ORM\JoinTable(name="join_table_name", joinColumns={@ORM\JoinColumn(onDelete="CASCADE")})
+/**
+ * @ORM\OneToMany(targetEntity="Custom\Entity\SOURCE_ENTITY", mappedBy="targetObject")
+ */
+protected $sourceObjects;
 ```
+
+
+## Join n:m
+
+**Custom\Entity\SOURCE_ENTITY**
+```
+<?php
+/**
+ * @ORM\ManyToMany(targetEntity="Custom\Entity\TARGET_ENTITY")
+ * @ORM\JoinTable(name="join_table_name", joinColumns={@ORM\JoinColumn(onDelete="CASCADE")})
+*/
+protected $targetObjects;
+```
+
+**Bidirektional in Custom\Entity\TARGET_ENTITY**
+```
+<?php
+/**
+ * @ORM\ManyToMany(targetEntity="Custom\Entity\SOURCE_ENTITY", mappedBy="targetObjects")
+*/
+protected $sourceObjects;
+```
+
 
 ## Join n:m (Selbstreferenzierend)
 
 ```
 <?php
-@ORM\ManyToMany(targetEntity="Custom\Entity\TARGET_ENTITY")
-@ORM\JoinTable(name="join_table_name", joinColumns={@ORM\JoinColumn(onDelete="CASCADE")}, inverseJoinColumns={@ORM\JoinColumn(onDelete="CASCADE", name="REFERENZ_ID", referencedColumnName="id")})
+/**
+ * @ORM\ManyToMany(targetEntity="Custom\Entity\TARGET_ENTITY")
+ * @ORM\JoinTable(name="join_table_name", joinColumns={@ORM\JoinColumn(onDelete="CASCADE")}, inverseJoinColumns={@ORM\JoinColumn(onDelete="CASCADE", name="REFERENZ_ID", referencedColumnName="id")})
+*/
+protected $sourceObjects;
 ```
 
 !!! note "Beispiel"
@@ -137,8 +199,10 @@ Listet alle konfiguierten Entitäten in einer Select-Auswahlliste auf:
 ## Join n:m (sortierbar)
 ```
 <?php
-@ORM\OneToMany(targetEntity="Custom\Entity\ProductNotes", mappedBy="product")
-@PIM\ManyToMany(targetEntity="Custom\Entity\Note", mappedBy="note")
+/**
+ * @ORM\OneToMany(targetEntity="Custom\Entity\ProductNotes", mappedBy="product")
+ * @PIM\ManyToMany(targetEntity="Custom\Entity\Note", mappedBy="note")
+*/
 protected $notes;
 ```
 
@@ -177,15 +241,21 @@ class ProductNotes extends Areanet\PIM\Entity\BaseSortable
 
 ```
 <?php
-@ORM\Column(type="string")
+/**
+ * @ORM\Column(type="string")
+*/
+protected $stringProperty;
 ```
 
 ## Textfeld mehrzeilig
 
 ```
 <?php
-@ORM\Column(type="text")
-@PIM\Textarea(lines=10)
+/**
+ * @ORM\Column(type="text")
+ * @PIM\Textarea(lines=10)
+*/
+protected $textProperty;
 ```
                                                                                                                
 !!! note "Hinweis"
@@ -194,15 +264,21 @@ class ProductNotes extends Areanet\PIM\Entity\BaseSortable
 ## Textfeld mit RTE
 ```
 <?php
-@ORM\Column(type="text")
-@PIM\Rte()
+/**
+ * @ORM\Column(type="text")
+ * @PIM\Rte()
+*/
+protected $rteProperty;
 ```
 
 ## Select-Feld
 ```
 <?php
-@ORM\Column(type="string")
-@PIM\Select(options="VALUE=LABEL, VALUE=LABEL, VALUE=LABEL")
+/**
+ * @ORM\Column(type="string")
+ * @PIM\Select(options="VALUE=LABEL, VALUE=LABEL, VALUE=LABEL")
+*/
+protected $selectProperty;
 ```
 
 ## Uhrzeit
@@ -210,12 +286,18 @@ class ProductNotes extends Areanet\PIM\Entity\BaseSortable
 Standardformat Stunden:Minute
 ```
 <?php
-@ORM\Column(type="time")
+/**
+ * @ORM\Column(type="time")
+*/
+protected $timeProperty;
 ```
 
 Benutzerdefiniertes Format, siehe <http://php.net/manual/de/function.date.php>
 ```
 <?php
-@ORM\Column(type="time")
-@PIM\Time(format='H:i:s')
+/**
+ * @ORM\Column(type="time")
+ * @PIM\Time(format='H:i:s')
+*/
+protected $timeProperty;
 ```
