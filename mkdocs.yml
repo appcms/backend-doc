@@ -1,15 +1,19 @@
 site_name: 'APP-CMS Server'
+site_favicon: 'images/favicon.ico'
 theme: 'material'
 version: '1.3.1'
 extra:
   palette:
     primary: 'red'
     accent: 'red'
+  logo: 'images/appcms_logo.png'
   social:
     - type: 'github'
-      link: 'https://github.com/appcms/server'
+      link: 'https://github.com/area-net-gmbh/appcms-server'
     - type: 'twitter'
-      link: 'https://twitter.com/app_agentur'
+      link: 'https://twitter.com/area_net_gmbh'
+    - type: 'facebook'
+      link: 'https://facebook.com/area.net.gmbh'
     - type: 'home'
       link: 'http://www.das-app-cms.de'
   disqus: 'appcms'
@@ -40,7 +44,7 @@ pages:
 - Anpassung Frontend:
   - Anpassung UI: 'ui-frontend/ui.md'
   - Benutzerdefiniertes Frontend: 'ui-frontend/frontend.md'
-  - Benutzerdefinierte Composer Bibliotheken: 'backend/composer.md1
+  - Benutzerdefinierte Composer Bibliotheken: 'backend/composer.md'
 - Datenbankzugriff:
   - Doctrine Repositories: 'database/repositories.md'
   - Doctrine DQL: 'database/dql.md'

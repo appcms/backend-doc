@@ -4,7 +4,7 @@
 
 **(1) Download eines Release-Paketes**
 
-Laden Sie sich das gewünschte Paket des APP-CMS Server unter <http://www.das-app-cms.de/download/server> herunter und entpacken es auf Ihrem Server
+Laden Sie sich das gewünschte Paket des APP-CMS Server unter <http://www.das-app-cms.de> herunter und entpacken es auf Ihrem Server
 
 **(2) Webserver (Virtual Host) DocumentRoot auf _appcms/public_ stellen**
 

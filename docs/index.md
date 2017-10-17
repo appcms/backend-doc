@@ -1,16 +1,17 @@
 # Einführung
 - **Lizenz**: Duale Lizenz AGPL v3 / Properitär
-- **Webseite**: http://www.das-app-cms.de
+- **Webseite**: <http://www.das-app-cms.de>
 
 ## Die APP-CMS Plattform
 
-- **Server**: <https://github.com/appcms/server>
-- **iOS SDK**: <https://github.com/appcms/ios-sdk>
+- **Server**: <https://github.com/area-net-gmbh/appcms-server>
+- **Cordova SD / Ionic Native**: _coming soon_
+- **iOS SDK**: _coming soon_
 - **Android SDK**: _coming soon_
 
 ## Tools und mehr
 
-- Vagrant-Umgebung für den Server: <https://github.com/appcms/vagrant>
+- Vagrant-Umgebung für den Server: <https://github.com/area-net-gmbh/appcms-vagrant>
 - Download + Dokumentation: <http://www.das-app-cms.de>
 
 ## Einführung und Überblick
@@ -49,7 +50,7 @@ Mit dem Server können serverseitig beliebige Inhalte gespeichert und verwaltet 
     - mod_deflate empfohlen
 - PHP 
     - mindestens Version 5.6
-    - Version 7 empfholen
+    - Version 7 empfohlen
 - PHP-Module
     - open_ssl
     - gd_lib
