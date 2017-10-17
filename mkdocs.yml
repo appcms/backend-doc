@@ -19,7 +19,7 @@ extra:
       link: 'https://facebook.com/area.net.gmbh'
     - type: 'home'
       link: 'http://www.das-app-cms.de'
-  disqus: 'appcms'
+  disqus: 'app-cms'
 markdown_extensions:
   - admonition
   - codehilite(linenums=true)
