@@ -38,9 +38,9 @@ REQUEST:
 Um die APP-CMS API nutzen zu können, müssen folgende HTTP-Header gesetzt sein:
 
 * **Content-Type**: application/json
-* **X-XSRF-TOKEN**: Token zur Authentifizierung
+* **APPCMS-TOKEN**: Token zur Authentifizierung
 
-## X-XSRF-TOKEN
+## APPCMS-TOKEN
 Einen Token erhalten Sie zurück, wenn Sie sich über die Login-API per Benutzername und Passwort authentifizieren:
 
 ```
@@ -67,7 +67,7 @@ Jeder Token muss einem Benutzer zugeordnet werden. Das Feld _Referrer_ dient als
         
 ## API-Dokumentation
 
-- [API-Dokumentation](/doku/api/1.3.0)
+- [API-Dokumentation](http://www.das-app-cms.de/docs/api/1.3.1)
 
 ## Performance-Tipps
 

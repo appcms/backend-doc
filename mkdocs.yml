@@ -1,6 +1,6 @@
 site_name: 'APP-CMS Server'
 theme: 'material'
-version: '1.3.0'
+version: '1.3.1'
 extra:
   palette:
     primary: 'red'
@@ -40,7 +40,7 @@ pages:
 - Anpassung Frontend:
   - Anpassung UI: 'ui-frontend/ui.md'
   - Benutzerdefiniertes Frontend: 'ui-frontend/frontend.md'
-  - Benutzerdefinierte Composer Bibliotheken: 'backend/composer.md'
+  - Benutzerdefinierte Composer Bibliotheken: 'backend/composer.md1
 - Datenbankzugriff:
   - Doctrine Repositories: 'database/repositories.md'
   - Doctrine DQL: 'database/dql.md'
