@@ -1,6 +1,6 @@
 # Benutzerdefinierte API-Aufrufe
 
-Sie können das APP-CMS jederzeit um benutzerdefinierte Schnittstellen (API-Aufrufe) ergänzen.
+Sie können das Contentfly CMS jederzeit um benutzerdefinierte Schnittstellen (API-Aufrufe) ergänzen.
 
 ## Controller anlegen
 
@@ -106,6 +106,23 @@ Hinzufügen einer URL-Route über HTTP-POST.
 ```
 <?php
 $controllerProvider->post('test', true);
+```
+
+**match($route, $isSecure = false, $action_name = null)**
+
+Hinzufügen einer URL-Route über HTTP-POST und HTTP-GET.
+
+| Parameter | Typ                                           | Optional | Beschreibung                                                                                         |
+|:----------|:----------------------------------------------|:---------|:-----------------------------------------------------------------------------------------------------|
+| $route    | String                                        | nein     | URL-Route 'routename' wird automatisch auf die Methode 'routenameAction' im Contoller gemappt, wenn keine dritter Parameter _action_name_ angegeben ist. |
+| $isSecure | Boolean | ja     |                                                                                                      | Erfordert Authentifizierung per Header-Token (Absichern von API-Aufrufen), andere Authentifizierungen werden derzeit noch nicht unterstützt.
+|        $action_name   |   String                                            |     ja     |      anstatt automatischem Mapping wird die URL-Route auf die hier angegebene Methode im Controller gemappt.                                                                                                 |
+
+- Rückgabe/Fluent Interface: _Areanet\PIM\Classes\Controller\Provider\Base\CustomControllerProvider_
+
+```
+<?php
+$controllerProvider->match('test', true);
 ```
 
 ### Beispiele

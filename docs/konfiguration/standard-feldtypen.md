@@ -1,7 +1,7 @@
 # Standard-Feldtypen
 
-Folgende Typen werden automatisch aus den dargestellten Annotations gemappt und im APP-CMS UI entsprechend dargestellt. Im Backend sind die im Standard mitgelieferten Eigenschaften-Typen 
-unter _appcms/areanet/PIM/Classes/Types_ definiert, die korrespondierende AngularJS-Directive im APP-CMS UI unter _appcms/areanet/PIM-UI/default/assets/types_
+Folgende Typen werden automatisch aus den dargestellten Annotations gemappt und im Contentfly CMS UI entsprechend dargestellt. Im Backend sind die im Standard mitgelieferten Eigenschaften-Typen 
+unter _appcms/areanet/PIM/Classes/Types_ definiert, die korrespondierende AngularJS-Directive im Contentfly CMS UI unter _appcms/areanet/PIM-UI/default/assets/types_
 
 ## Checkbox
 ```
@@ -43,7 +43,7 @@ protected $images;
 ```
 
 Für sortierbare, verknüpfte Entitäten muss eine "Zwischen-Entität" (vgl. n-m-Join bei einer Datenbank angelegt werden) vom Typ _BaseSortable_ angelegt werden. 
-Die Doctrine Annotatin _@ORM\OneToMany_ ist die eigentlich relevante Konfiguration für die Datenbank. Die Annotation _@PIM\ManyToMany_ dient dem APP-CMS UI dazu, 
+Die Doctrine Annotatin _@ORM\OneToMany_ ist die eigentlich relevante Konfiguration für die Datenbank. Die Annotation _@PIM\ManyToMany_ dient dem Contentfly CMS UI dazu, 
 um die Oberfläche korrekt darstellen zu können.
 
 ```
@@ -207,7 +207,7 @@ protected $notes;
 ```
 
 Für sortierbare, verknüpfte Entitäten muss eine "Zwischen-Entität" (vgl. n-m-Join bei einer Datenbank angelegt werden) vom Typ _BaseSortable_ angelegt werden. 
-Die Doctrine Annotatin _@ORM\OneToMany_ ist die eigentlich relevante Konfiguration für die Datenbank. Die Annotation _@PIM\ManyToMany_ dient dem APP-CMS UI dazu, 
+Die Doctrine Annotatin _@ORM\OneToMany_ ist die eigentlich relevante Konfiguration für die Datenbank. Die Annotation _@PIM\ManyToMany_ dient dem Contentfly CMS UI dazu, 
 um die Oberfläche korrekt darstellen zu können.
 
 ```

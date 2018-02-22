@@ -1,7 +1,7 @@
 # Erweiterung Standard-Entitäten
 
 ## PHP-Traits
-Folgende Entities des APP-CMS können über [Traits](http://php.net/manual/de/language.oop5.traits.php) erweitert werden:
+Folgende Entities des Contentfly CMS können über [Traits](http://php.net/manual/de/language.oop5.traits.php) erweitert werden:
 
 - **Areanet\PIM\Entity\User**
 - **Areanet\PIM\Entity\Group**

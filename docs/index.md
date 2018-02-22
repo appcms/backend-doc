@@ -1,37 +1,36 @@
 # Einführung
 - **Lizenz**: Duale Lizenz AGPL v3 / Properitär
-- **Webseite**: <http://www.das-app-cms.de>
+- **Webseite**: <http://www.contentfly-cms.de>
 
-## Die APP-CMS Plattform
+## Die Contentfly Plattform
 
-- **Server**: <https://github.com/area-net-gmbh/appcms-server>
-- **Cordova SD / Ionic Native**: _coming soon_
-- **iOS SDK**: _coming soon_
-- **Android SDK**: _coming soon_
+- **Server**: <https://github.com/area-net-gmbh/contentfly-cms>
+- **Ionic SDK**: <https://github.com/area-net-gmbh/contentfly-ionic>
+- **iOS SDK**:  <https://github.com/area-net-gmbh/contentfly-ios>
 
 ## Tools und mehr
 
-- Vagrant-Umgebung für den Server: <https://github.com/area-net-gmbh/appcms-vagrant>
-- Download + Dokumentation: <http://www.das-app-cms.de>
+- Vagrant-Umgebung für das CMS: <https://github.com/area-net-gmbh/contentfly-vagrant>
+- Download + Dokumentation: <http://www.contentfly-cms.de>
 
 ## Einführung und Überblick
 
-Mit der APP-CMS Plattform können mobile Apps für iOS und Android unter dem Einsatz von nativen und webbasierten Technologien inklusive Synchronisations-Anbindung an einen Server entwickelt werden. 
+Mit der Contentfly Plattform können mobile Apps für iOS und Android unter dem Einsatz von nativen und webbasierten Technologien inklusive Synchronisations-Anbindung an einen Server entwickelt werden. 
 
 Der Server basiert dabei auf PHP und MySQL und kann auf nahezu jedem Standard-Hosting-Provider eingesetzt werden. Die SDKs für iOS und Android unterstützen Entwickler bei der Datenhaltung, Synchronisation und Darstellung von Inhalten. Zudem enhalten die SDKs eine Template-Engine, mit der Oberflächen einfach und plattformübergreifen in HTML erstellt werden können.
 
 Es ist dem Entwickler völlig freigestellt, ob Apps komplett nativ oder in Kombination mit webbasierten Bereichen umgesetzt werden.
 
-!!! note "APP-CMS != Baukasten-System"
-    Die APP-CMS Plattform ist kein Baukasten-System, mit dem sich Apps ohne Vorkenntnisse zusammenklicken lassen - sondern bietet ein technisches Rahmenwerk, mit sich mobile Apps effizient, kosten-nutzenoptimiert, aber dennoch frei von Zwängen anderer (hybrider) Frameworks wie Titanium Mobile oder PhoneCap.
+!!! note "Contentfly != Baukasten-System"
+    Die Contentfly Plattform ist kein Baukasten-System, mit dem sich Apps ohne Vorkenntnisse zusammenklicken lassen - sondern bietet ein technisches Rahmenwerk, mit sich mobile Apps effizient, kosten-nutzenoptimiert, aber dennoch frei von Zwängen anderer (hybrider) Frameworks wie Titanium Mobile oder PhoneCap.
 
-Für die Entwicklung von Apps mit dem APP-CMS Framework sind folgende Kentnisse erforderlich:
+Für die Entwicklung von Apps mit dem Contentfly Framework sind folgende Kentnisse erforderlich:
 
-- **Server**: PHP und optimalerweise Doctrine und MySQL
+- **CMS**: PHP und optimalerweise Doctrine und MySQL
+- **Ionic**: Typescript/Javascript und gegebenfalls HTML5
 - **iOS**: Swift oder Objective-C und gegebenfalls HTML5
-- **Android**: Java und gegebenfalls HTML5
 
-## Der APP-CMS Server
+## Das Contentfly CMS
 
 Mit dem Server können serverseitig beliebige Inhalte gespeichert und verwaltet werden. Der Server kann letztendlich auch losgelöst von mobilen Apps betrieben werden. Über eine Schnittstelle kann auf alle auf dem Server gespeicherten Daten zugegriffen werden. Damit kann der Server auch zum Beispiel als zusätzliches PIM (Product Information Managament) für eine Webseite in TYPO3 oder Wordpress eingesetzt werden.
 
@@ -49,8 +48,7 @@ Mit dem Server können serverseitig beliebige Inhalte gespeichert und verwaltet 
     - FollowSymLinks aktiviert
     - mod_deflate empfohlen
 - PHP 
-    - mindestens Version 5.6
-    - Version 7 empfohlen
+    - mindestens Version 7.1
 - PHP-Module
     - open_ssl
     - gd_lib
@@ -63,9 +61,9 @@ Mit dem Server können serverseitig beliebige Inhalte gespeichert und verwaltet 
 
 ## Lizenz
 
-Die APP-CMS-Plattform ist unter eine dualen Lizenz (AGPL v3 und properitär) verfügbar. Die genauen Lizenzbedingungen sind in der Datei _licence.txt_ zu finden.
+Die Contentfly Plattform ist unter eine dualen Lizenz (AGPL v3 und properitär) verfügbar. Die genauen Lizenzbedingungen sind in der Datei _licence.txt_ zu finden.
 
-**Die APP-CMS Plattform ist ein Produkt der AREA-NET GmbH**
+**Die Contentfly Plattform ist ein Produkt der AREA-NET GmbH**
 
 AREA-NET GmbH
 Öschstrasse 33
@@ -77,7 +75,7 @@ AREA-NET GmbH
 - Telefax: 0 71 62 / 94 11 18
 - http://www.area-net.de
 - http://www.app-agentur-bw.de
-- http://www.das-app-cms.de
+- http://www.contentfly-cms.de
 
 
 **Geschäftsführer**

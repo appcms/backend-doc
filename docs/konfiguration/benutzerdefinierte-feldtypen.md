@@ -1,6 +1,6 @@
 # Benutzerdefinierte Feldtypen 
 
-Im APP-CMS können die [Standard-Feldtype](standard-feldtypen.md) durch eigene Feldtypen erweitert werden. Ein Feldtyp besteht dabei aus einer Backend-Komponente (PHP) und einer UI-Komponente (AngularJS-Direktive und Template).
+Im Contentfly CMS können die [Standard-Feldtypen](standard-feldtypen.md) durch eigene Feldtypen erweitert werden. Ein Feldtyp besteht dabei aus einer Backend-Komponente (PHP) und einer UI-Komponente (AngularJS-Direktive und Template).
 
 ## Backend-Komponente
 

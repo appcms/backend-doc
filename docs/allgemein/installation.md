@@ -4,13 +4,13 @@
 
 **(1) Download eines Release-Paketes**
 
-Laden Sie sich das gewünschte Paket des APP-CMS Server unter <http://www.das-app-cms.de> herunter und entpacken es auf Ihrem Server
+Laden Sie sich das gewünschte Paket des Contentfly CMS unter <https://www.contentfly-cms.de> herunter und entpacken es auf Ihrem Server.
 
 **(2) Webserver (Virtual Host) DocumentRoot auf _appcms/public_ stellen**
 
 **(3) URL/Host im Browser aufrufen und Installations-Hinweisen folgen**
 
-Nach der Installation können Sie sich mit Benutzernamen=admin und Passwort=admin am APP-CMS anmelden.
+Nach der Installation können Sie sich mit Benutzernamen=admin und Passwort=admin am Contentfly CMS anmelden.
 
 !!! note "Sicherheits-Hinweis"
     Denken Sie bitte daran, dass Admin-Passwort nach dem ersten Login abzuändern.
@@ -18,7 +18,7 @@ Nach der Installation können Sie sich mit Benutzernamen=admin und Passwort=admi
 !!! tip "Nach der Installation kein Login möglich?"
     Sollte nach der Installtion kein Login möglich sein und ein Datenbankfehler erscheinen, wurde vermutlich die Datenbank nicht korrekt eingerichtet.
     Führen Sie in diesem Fall bitte aus dem nächsten Kapitel _Manuelle Installation/Kompilierung aus Git_ die Schritte (3), (4) und (5) aus. Danach müsste das
-    APP-CMS im Browser korrekt funktionieren.
+    Contentfly CMS im Browser korrekt funktionieren.
 
    
 
@@ -28,10 +28,9 @@ Nach der Installation können Sie sich mit Benutzernamen=admin und Passwort=admi
 
 ```
 #!/bin/bash
-git clone https://github.com/appcms/server.git
+git clone https://github.com/area-net-gmbh/contentfly-cms.git
 ```
 
-Alternativ kann der Quellcode auch als [ZIP-Datei](https://github.com/appcms/server/archive/master.zip) heruntergeladen und entpackt werden.
 
 **(2) Systemumgebung über Ant-Buildskript[^1] im Root-Ordner[^2] erstellen**
 
@@ -49,7 +48,7 @@ ant
 php console.php orm:schema:update --force
 ```
 
-Beachten Sie die Hinweise zur den [APP-CMS-Konsolenbefehlen](konsole.md)
+Beachten Sie die Hinweise zur den [Contentfly CMS Konsolenbefehlen](konsole.md)
 
 **(5) Datenbank im Ordner appcms initalisieren/einrichten**
 
@@ -86,8 +85,7 @@ Für den Nginx-Webserver entfernen Sie am besten die mitgelieferte _.htaccess-Da
     - FollowSymLinks aktiviert
     - mod_deflate empfohlen
 - PHP 
-    - mindestens Version 5.6
-    - Version 7 empfholen
+    - mindestens Version 7.1
 - PHP-Module
     - open_ssl
     - gd_lib
@@ -99,4 +97,4 @@ Für den Nginx-Webserver entfernen Sie am besten die mitgelieferte _.htaccess-Da
     - mindestens Version 5.5
 
 [^1]: <http://ant.apache.org/>
-[^2]: Im Root-Ordner des APP-CMS befindet sich z.B. die Datei _build.xml_
+[^2]: Im Root-Ordner des Contentfly CMS befindet sich z.B. die Datei _build.xml_

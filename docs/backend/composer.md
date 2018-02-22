@@ -8,7 +8,7 @@ Wechseln Sie dazu in den Ordner __custom__ und installieren Sie das gewünschte 
 composer require phpmailer/phpmailer
 ```
 
-Composer installiert daraufhin alle benötigten Abhängikeiten im Ordner __custom/vendor__. Das APP-CMS lädt automatisch - ohne weitere Konfiguration - 
+Composer installiert daraufhin alle benötigten Abhängikeiten im Ordner __custom/vendor__. Das Contentfly CMS lädt automatisch - ohne weitere Konfiguration - 
 die entsprechenden Autoload-Skripte. Sie können die installierte Bibliothek im Anschluss direkt in Ihrem Code verwenden.
 
 **Beispiel custom/app.php**

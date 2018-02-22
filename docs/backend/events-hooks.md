@@ -1,7 +1,7 @@
 # Events und Hooks
 
-Events sind definierte Ereignisse, die im Workflow des APP-CMS auftreten bzw. auftreten können. 
-Für jedes Event kann ein Eventhandler (oder auch mehrere) reqistriert werden, der automatisch beim Auftreten des Events vom APP-CMS aufgerufen wird.
+Events sind definierte Ereignisse, die im Workflow des Contentfly CMS auftreten bzw. auftreten können. 
+Für jedes Event kann ein Eventhandler (oder auch mehrere) reqistriert werden, der automatisch beim Auftreten des Events vom Contentfly CMS aufgerufen wird.
 
 ## Eventhandler
 
@@ -10,25 +10,38 @@ Für jedes Event kann ein Eventhandler (oder auch mehrere) reqistriert werden, d
 _in custom/app.php_
 ```
 <?php
-$app['dispatcher']->addListener(EVENT_NAME, function (\Areanet\PIM\Classes\Event $event) {
-  //Event-Handling
-  $response = $event->getParam('response')`
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
+$app->extend('dispatcher', function (EventDispatcherInterface $dispatcher, $app) {
+  
+  $dispatcher->addListener('EVENT1', function ($event) {
+    //Event-Handling
+    $response = $event->getParam('response');
+  });
+  
+  $dispatcher->addListener('EVENT2', function ($event) {
+    //Event-Handling
+    $response = $event->getParam('response');
+  });
+  
+  return $dispatcher;
+
 });
 ```
 
-Jedes Event wird vom APP-CMS mit unterschiedlichen Parametern aufgerufen. Diese können über _$event->getParam(NAME)_ abgefragt werden. 
+Jedes Event wird vom Contentfly CMS mit unterschiedlichen Parametern aufgerufen. Diese können über _$event->getParam(NAME)_ abgefragt werden. 
 Die zum jeweiligen Event verfügbaren Parameter finden Sie in den folgenden Abschnitten. 
 
 ### Parameter anpassen
 
-Die vom Event übergebenen Paramater können angepasst werden, um den weitergehende Programmausführung des APP-CMS zu beeinflussen. Beispielsweise kann bei der Auflistung der Objekte 
+Die vom Event übergebenen Paramater können angepasst werden, um den weitergehende Programmausführung des Contentfly CMS zu beeinflussen. Beispielsweise kann bei der Auflistung der Objekte 
 über die Schnittstelle _/api/list_ die Limitierung auf 2 Objekte gesetzt werden.
 
 #### Objekte
 Parameter die einen Objekttyp, z.B. _\Symfony\Component\HttpFoundation\Response_ haben, können direkt angepasst werden.
 ```
 <?php
-$app['dispatcher']->addListener(EVENT_NAME, function (\Areanet\PIM\Classes\Event $event) {
+$dispatcher->addListener(EVENT_NAME, function (\Areanet\PIM\Classes\Event $event) {
   $response = $event->getParam('response'); // \Symfony\Component\HttpFoundation\Response
   $response->headers->set('Content-Type', 'text/html');
 });
@@ -38,7 +51,7 @@ $app['dispatcher']->addListener(EVENT_NAME, function (\Areanet\PIM\Classes\Event
 Parameter, die vom Typ _Array_ oder _String_ sind, müssen nach der Anpassung wieder an die Eventklasse zurückgeschrieben werden.
 ```
 <?php
-$app['dispatcher']->addListener(EVENT_NAME, function (\Areanet\PIM\Classes\Event $event) {
+$dispatcher->addListener(EVENT_NAME, function (\Areanet\PIM\Classes\Event $event) {
   $pushTitle = $event->getParam('pushTitle'); // String
   $pushTitle = 'foo';
   $event->setParam('pushTitle', $pushTitle);
@@ -46,11 +59,11 @@ $app['dispatcher']->addListener(EVENT_NAME, function (\Areanet\PIM\Classes\Event
 ```
 
 ### Ausführung abbrechen
-Sie können eine komplette Ausführung des APP-CMS in einem Eventhandler abbrechen, um z.B. den Upload von Dateien für bestimmte Benutzer(gruppen) backend-seitig zu deaktivieren.
+Sie können eine komplette Ausführung des Contentfly CMS in einem Eventhandler abbrechen, um z.B. den Upload von Dateien für bestimmte Benutzer(gruppen) backend-seitig zu deaktivieren.
 
 ```
 <?php
-$app['dispatcher']->addListener(EVENT_NAME, function (\Areanet\PIM\Classes\Event $event) {
+$dispatcher->addListener(EVENT_NAME, function (\Areanet\PIM\Classes\Event $event) {
   $user = $event->getParam('user'); // Areanet\Entity/User
   
   if($user->getAlias() == 'Peter Pan'){
@@ -61,7 +74,7 @@ $app['dispatcher']->addListener(EVENT_NAME, function (\Areanet\PIM\Classes\Event
 
 ## Controller-Events
 
-Die Controller Events sind, wie der Name schon sagt, an die APP-CMS-Controller gebunden. 
+Die Controller Events sind, wie der Name schon sagt, an die Contentfly CMS-Controller gebunden. 
 
 !!! note "Hinweis"
     Die Controller und entsprechenden Methoden 
@@ -80,7 +93,7 @@ Wird vor der eigentlichen Code-Ausführung von jedem Controller ausgeführt.
 **Beispiel**
 ```
 <?php
-$app['dispatcher']->addListener('pim.controller.before', function(\Areanet\PIM\Classes\Event $event){});
+$dispatcher->addListener('pim.controller.before', function(\Areanet\PIM\Classes\Event $event){});
 ```
 
 ### pim.controller.before.CONTROLLER 
@@ -96,7 +109,7 @@ Wird vor der eigentlichen Code-Ausführung von jedem Controller mit dem Name _CO
 **Beispiel**
 ```
 <?php
-$app['dispatcher']->addListener('pim.controller.before.api', function(\Areanet\PIM\Classes\Event $event){});
+$dispatcher->addListener('pim.controller.before.api', function(\Areanet\PIM\Classes\Event $event){});
 ```
 
 ### pim.controller.before.CONTROLLER.METHOD 
@@ -111,7 +124,7 @@ Wird vor der eigentlichen Code-Ausführung von jedem Controller mit dem Name _CO
 **Beispiel**
 ```
 <?php
-$app['dispatcher']->addListener('pim.controller.before.api.list', function(\Areanet\PIM\Classes\Event $event){});
+$dispatcher->addListener('pim.controller.before.api.list', function(\Areanet\PIM\Classes\Event $event){});
 ```
 
 ### pim.controller.after 
@@ -126,7 +139,7 @@ Wird nach der eigentlichen Code-Ausführung von jedem Controller ausgeführt.
 **Beispiel**
 ```
 <?php
-$app['dispatcher']->addListener('pim.controller.after', function(\Areanet\PIM\Classes\Event $event){});
+$dispatcher->addListener('pim.controller.after', function(\Areanet\PIM\Classes\Event $event){});
 ```
 
 ### pim.controller.after.CONTROLLER 
@@ -142,7 +155,7 @@ Wird nach der eigentlichen Code-Ausführung von jedem Controller mit dem Name _C
 **Beispiel**
 ```
 <?php
-$app['dispatcher']->addListener('pim.controller.after.api', function(\Areanet\PIM\Classes\Event $event){});
+$dispatcher->addListener('pim.controller.after.api', function(\Areanet\PIM\Classes\Event $event){});
 ```
 
 ### pim.controller.after.CONTROLLER.METHOD 
@@ -159,7 +172,7 @@ Wird vor der eigentlichen Code-Ausführung von jedem Controller mit dem Name _CO
 ```
 <?php
 //JSON-Response nach /api/schema verändern
-$app['dispatcher']->addListener('pim.controller.after.api.schema', function (\Areanet\PIM\Classes\Event $event) {
+$dispatcher->addListener('pim.controller.after.api.schema', function (\Areanet\PIM\Classes\Event $event) {
     $response         = $event->getParam('response');
     $content          = json_decode($response->getContent());
     $content->message = "mySchemaAction";
@@ -169,7 +182,7 @@ $app['dispatcher']->addListener('pim.controller.after.api.schema', function (\Ar
 
 ## Entity-Events
 
-Die Entity-Events sind, wie der Name schon sagt, an Statusupdates der Doctrine-Entities im APP-CMS gebunden. Die folgenden Entity-Events 
+Die Entity-Events sind, wie der Name schon sagt, an Statusupdates der Doctrine-Entities im Contentfly CMS gebunden. Die folgenden Entity-Events 
 werden sowohl für die Standard-Entities, als auch für die benutzerdefinierten Entities aufgerufen.
 
 
@@ -189,7 +202,7 @@ den _QueryBuilder_ möglich.
 **Beispiel**
 ```
 <?php
-$app['dispatcher']->addListener('pim.entity.before.list', function(\Areanet\PIM\Classes\Event $event){
+$dispatcher->addListener('pim.entity.before.list', function(\Areanet\PIM\Classes\Event $event){
    $queryBuilder = $event->getParam('queryBuilder');
    $queryBuilder->setMaxResults(2); //MySQL LIMIT
 });
@@ -210,7 +223,7 @@ die zu speichernden Daten/Eigenschaften über den Parameter _data_ manipuliert w
 **Beispiel**
 ```
 <?php
-$app['dispatcher']->addListener('pim.entity.before.insert', function(\Areanet\PIM\Classes\Event $event){
+$dispatcher->addListener('pim.entity.before.insert', function(\Areanet\PIM\Classes\Event $event){
    $data = $event->getParam('data');
    $data['title'] = 'Test';
 });
@@ -230,7 +243,7 @@ Wird nach dem Hinzufügen (Neu Speichern) einer Entität in der _insert_-Methode
 **Beispiel**
 ```
 <?php
-$app['dispatcher']->addListener('pim.entity.after.insert', function(\Areanet\PIM\Classes\Event $event){
+$dispatcher->addListener('pim.entity.after.insert', function(\Areanet\PIM\Classes\Event $event){
    $object = $event->getParam('object');
    $object->getTitle();
 });
@@ -252,7 +265,7 @@ die zu speichernden Daten/Eigenschaften über den Parameter _data_ manipuliert w
 **Beispiel**
 ```
 <?php
-$app['dispatcher']->addListener('pim.entity.before.update', function(\Areanet\PIM\Classes\Event $event){
+$dispatcher->addListener('pim.entity.before.update', function(\Areanet\PIM\Classes\Event $event){
    $data = $event->getParam('data');
    $data['title'] = 'Test';
 });
@@ -273,7 +286,7 @@ Wird nach dem Aktualisieren (Speichern) einer Entität in der _update_-Methode i
 **Beispiel**
 ```
 <?php
-$app['dispatcher']->addListener('pim.entity.after.update', function(\Areanet\PIM\Classes\Event $event){ });
+$dispatcher->addListener('pim.entity.after.update', function(\Areanet\PIM\Classes\Event $event){ });
 ```
 
 ### pim.entity.before.delete
@@ -290,7 +303,7 @@ Wird vor dem Aktualisieren (Speichern) einer Entität in der _delete_-Methode im
 **Beispiel**
 ```
 <?php
-$app['dispatcher']->addListener('pim.entity.before.delete', function(\Areanet\PIM\Classes\Event $event){});
+$dispatcher->addListener('pim.entity.before.delete', function(\Areanet\PIM\Classes\Event $event){});
 ```
 
 ### pim.entity.after.delete
@@ -307,7 +320,7 @@ Wird nach dem Löschen einer Entität in der _delete_-Methode im _Api_-Controlle
 **Beispiel**
 ```
 <?php
-$app['dispatcher']->addListener('pim.entity.after.delete', function(\Areanet\PIM\Classes\Event $event){ });
+$dispatcher->addListener('pim.entity.after.delete', function(\Areanet\PIM\Classes\Event $event){ });
 ```
 
 ##File-Events
@@ -326,7 +339,7 @@ Die File-Events sind, wie der Name schon sagt, an Dateifunktionen wie z.B. Uploa
 **Beispiel**
 ```
 <?php
-$app['dispatcher']->addListener('pim.entity.before.upload', function(\Areanet\PIM\Classes\Event $event){ });
+$dispatcher->addListener('pim.entity.before.upload', function(\Areanet\PIM\Classes\Event $event){ });
 ```
 
 ### pim.file.after.upload
@@ -341,7 +354,7 @@ $app['dispatcher']->addListener('pim.entity.before.upload', function(\Areanet\PI
 **Beispiel**
 ```
 <?php
-$app['dispatcher']->addListener('pim.entity.after.upload', function(\Areanet\PIM\Classes\Event $event){ });
+$dispatcher->addListener('pim.entity.after.upload', function(\Areanet\PIM\Classes\Event $event){ });
 ```
 
 ### pim.file.before.get
@@ -358,7 +371,7 @@ Wird vor
 **Beispiel**
 ```
 <?php
-$app['dispatcher']->addListener('pim.entity.after.upload', function(\Areanet\PIM\Classes\Event $event){ });
+$dispatcher->addListener('pim.entity.after.upload', function(\Areanet\PIM\Classes\Event $event){ });
 ```
 
 ## Push-Events
@@ -381,12 +394,61 @@ Wird vor dem Versenden einer Push-Nachricht an registrierte iOS- und Android-Cli
 **Beispiel**
 ```
 <?php
-$app['dispatcher']->addListener('pim.push.before.send', function(\Areanet\PIM\Classes\Event $event){
+$dispatcher->addListener('pim.push.before.send', function(\Areanet\PIM\Classes\Event $event){
     $user                       = $event->getParam('user');
     
     $additionalData             = $event->getParam('additionalData');
     $addtionalData['userAlias'] = $user->getAlias();
     
     $event->setParam('additionalData',$additionalData);
+});
+```
+
+## Schema-Events
+
+Wird aufgerufen, nachdem eine Klassen-Annotation verarbeitet wurde. Kann genutzt werden, um benutzerdefinierte Annotationen in das Schema aufzunehmen.
+### pim.schema.after.classAnnotation
+
+Wird nach jeder Verarbeitung einer Klassen-Annotation geworfen.
+
+| Parameter | Typ |
+|:----------|:----|
+| classAnnotation   |    Doctrine\Common\Annotations\Annotation  |
+| settings          |  Bisherige Schema-Eigenschaften der Entität als Array, wird wieder zurückgeschrieben (muss dafür im Eventhandler mit $event->setProperty('settings', $settings) gesetzt werden)   |
+**Beispiel**
+```
+<?php
+$dispatcher->addListener('pim.schema.after.classAnnotation', function(\Areanet\PIM\Classes\Event $event){
+    $settings          = $event->getParam('settings');
+    $classAnnotation   = $event->getParam('classAnnotation');
+    
+    if ($classAnnotation instanceof \Custom\Classes\Annotations\Test) {
+        $settings['test'] = true;
+        $event->setParam('settings', $settings);
+    }
+    
+});
+```
+
+### pim.schema.after.propertyAnnotation
+
+Wird aufgerufen, nachdem eine Property-Annotation verarbeitet wurde. Kann genutzt werden, um benutzerdefinierte Annotationen in das Schema aufzunehmen.
+
+| Parameter | Typ |
+|:----------|:----|
+| propertyAnnotation   |    Doctrine\Common\Annotations\Annotation  |
+| properties          |  Bisherige benutzerdefinierte Schema-Eigenschaften zur Property als Array, wird wieder zurückgeschrieben (muss dafür im Eventhandler mit $event->setProperty('properties', $properties) gesetzt werden)   |
+**Beispiel**
+```
+<?php
+$dispatcher->addListener('pim.schema.after.propertyAnnotation', function(\Areanet\PIM\Classes\Event $event){
+    $properties         = $event->getParam('properties');
+    $propertyAnnotation = $event->getParam('propertyAnnotation');
+    
+    if ($propertyAnnotation instanceof \Custom\Classes\Annotations\Map) {
+        $properties['googleMap'] = true;
+        $event->setParam('properties', $properties);
+    }
+    
 });
 ```

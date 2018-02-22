@@ -2,20 +2,20 @@
 
 ## Installation und Einrichtung
 
-Installieren Sie das APP-CMS nach den entsprechenden [Installations-Anleitungen](installation.md) und rufen Sie im Anschluss das APP-CMS über einen Webbrowser aus.
+Installieren Sie das Contentfly CMS nach den entsprechenden [Installations-Anleitungen](installation.md) und rufen Sie im Anschluss das Contentfly CMS über einen Webbrowser aus.
 
-## Login in den Server
+## Login in das CMS
 
-Nach der Installation können Sie sich mit Benutzername _admin_ und Passwort _admin_ in das APP-CMS UI einloggen. Vergessen Sie nicht das Passwort nach dem ersten Login abzuändern.
+Nach der Installation können Sie sich mit Benutzername _admin_ und Passwort _admin_ in das Contentfly CMS einloggen. Vergessen Sie nicht das Passwort nach dem ersten Login abzuändern.
 
 ![Login ](../images/screen_login.png)
 
-Da Sie bis jetzt noch keine zu pflegende Datenstruktur konfiguriert haben, können Sie natürlich derzeit auch noch keine Daten über das APP-CMS pflegen. 
+Da Sie bis jetzt noch keine zu pflegende Datenstruktur konfiguriert haben, können Sie natürlich derzeit auch noch keine Daten über das Contentfly CMS pflegen. 
 Beginnen wir also eine erste Datenbank-Tabelle, bzw. eine Doctrine-Entität zu erstellen.
 
 ## Erste Entität erstellen
 
-Über das APP-CMS können Sie eine nahezu beliebige Datebankstruktur verwalten. Das APP-CMS verwendet dazu das ORM-Framework Doctrine. 
+Über das Contentfly CMS können Sie eine nahezu beliebige Datebankstruktur verwalten. Das Contentfly CMS verwendet dazu das ORM-Framework Doctrine. 
 Eine Datenbank-Tabelle heißt im Doctrine-Chargon Entität. Definieren wir uns also eine erste Entität.
 
 **custom/Entity/Mandant.php**
@@ -129,22 +129,24 @@ Die Entität dürfte selbsterklärend sein. Mit dieser Entität können wir in Z
 _Name_, _Strasse_, _PLZ_ und _Ort_ pflegen - wobei _Name_ dabei ein Pflichtfeld ist.
 
 !!! Annotationen
-    Die Konfiguration der Entität erfolgt im APP-CMS über sogenannte Annotationen. 
+    Die Konfiguration der Entität erfolgt im Contentfly CMS über sogenannte Annotationen. 
     Über das Prefix _@ORM_ werden alle bekannten Doctrine-Annotationen[^1] unterstützt. Über das Prefix _@PIM_ können diese mit speziellen 
-    Eigenschaften für z.B. die APP-CMS Oberfläche ergänzt werden.
+    Eigenschaften für z.B. die Contentfly CMS Oberfläche ergänzt werden.
+ 
+!!! tip "Datenbank aktualisieren!"
+    Nachdem Sie die Entitäten konfiguriert haben, muss das Contentfly CMS diese noch in die Datenbank übertragen. Dieser Vorgang muss von Ihnen manuell angestoßen werden - lesen Sie dazu die Hinweise im nächsten Abschnitt. 
     
 ##  Datenbank aktualisieren
 
-Sollte Ihr PHP-Installation den Befehl _exec()_ unterstützen und Sie die [Konfigurations-Variable SYSTEM_PHP_CLI_COMMAND](../entwicklung/setup.md#konsole) korrekt gesetzt haben, 
-können Sie die Datenbank über die APP-CMS-Oberfläche unter _Administration->Einstellungen->Datenbank_ synchroniseren aktualisieren.
+Die Datenbank können Sie im Contentfly CMS unter _Administration->Einstellungen->Datenbank_ synchroniseren aktualisieren.
 
 ![Database ](../images/screen_database_sync.png)
 
-Alternativ können Sie die Datenbank auch über die [Konsole](konsole.md) aktualisieren:
+Alternativ können Sie die Datenbank auch über die [Konsole](konsole.md) im Ordner "appcms" aktualisieren:
 
 ```
 #!/bin/bash
-php vendor/bin/doctrine orm:schema:update --force
+php console.php orm:schema:update --force
 ```
 
 ## Daten bearbeiten
@@ -159,13 +161,21 @@ Mit einem Klick auf das Bleistift-Symbol können Sie einen ausgewählten Eintrag
 
 ## Herzlichen Glückwunsch
 
-Herzlichen Glückwunsch, Sie haben die ersten erfolgreichen Schritte mit dem APP-CMS gemacht und können sich nun in weitere Tiefen vorwagen.
+Herzlichen Glückwunsch, Sie haben die ersten erfolgreichen Schritte mit dem Contentfly CMS gemacht und können sich nun in weitere Tiefen vorwagen.
 
 !!! tip "Wussten Sie schon?"
     Wussten Sie schon, dass Sie auf die neu erstellte Entität ohne weitere Zutun bereits über eine API zugreifen können?
-    Dazu rufen Sie einfach über einen entsprechenden Webservice-Client folgenden GET-Befehl auf:
+    Dazu rufen Sie einfach über einen entsprechenden Webservice-Client folgenden POST-Befehl auf:
     
-    _https://ihr-app-cms.de/api/list/Mandant_
+    _https://ihr-contentfly-cms.de/api/list/_
+    
+    _POST_Parameter:_
+    ```
+    {
+      entity: "Mandant",
+      order: {"name": "ASC"}
+    }
+    ```
     
     Mehr Informationen zur Arbeit mit der [Schnittstelle/API](schnittstelle.md).
 

@@ -1,6 +1,6 @@
 # Benutzerdefinierte Konsolen-Befehle
 
-Im APP-CMS können eigene Konsolen-Befehle erstellt und über die Konsole gestartet werden.
+Im Contentfly CMS können eigene Konsolen-Befehle erstellt und über die Konsole gestartet werden.
 
 ## Konsolen-Befehl anzeigen
 

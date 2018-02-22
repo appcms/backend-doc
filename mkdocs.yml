@@ -1,10 +1,10 @@
-site_name: 'APP-CMS Server'
+site_name: 'Contentfly CMS'
 site_favicon: 'images/favicon.ico'
 google_analytics:
   - 'UA-19350837-3'
   - 'auto'
 theme: 'material'
-version: '1.3.2'
+version: '1.4.0'
 extra:
   palette:
     primary: 'red'
@@ -12,13 +12,13 @@ extra:
   logo: 'images/appcms_logo.png'
   social:
     - type: 'github'
-      link: 'https://github.com/area-net-gmbh/appcms-server'
+      link: 'https://github.com/area-net-gmbh/contentfly-cms'
     - type: 'twitter'
       link: 'https://twitter.com/area_net_gmbh'
     - type: 'facebook'
       link: 'https://facebook.com/area.net.gmbh'
     - type: 'home'
-      link: 'http://www.das-app-cms.de'
+      link: 'http://www.contentfly-cms.de'
 markdown_extensions:
   - admonition
   - codehilite(linenums=true)
@@ -42,6 +42,7 @@ pages:
     - Erweiterung Standard-Entitäten: 'backend/standard-entitaeten.md'
     - Benutzerdefinierte API-Aufrufe: 'backend/api.md'
     - Benutzerdefinierte Konsolenbefehle: 'backend/konsole.md'
+    - Benutzerdefinierter Login-Manager (SSO): 'backend/loginmanager.md'
     - Benutzerdefinierte Composer Bibliotheken: 'backend/composer.md'
 - Anpassung Frontend:
   - Anpassung UI: 'ui-frontend/ui.md'

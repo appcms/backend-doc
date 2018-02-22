@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="APP-CMS" default="main" basedir=".">
+<project name="CONTENTFLY-CMS-DOC" default="main" basedir=".">
 
     <property environment="env"/>
 

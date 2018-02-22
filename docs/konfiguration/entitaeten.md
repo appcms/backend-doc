@@ -1,7 +1,7 @@
 # Entitäten
 ## Doctrine
 
-Die Datenmodellelierung im APP-CMS erfolgt objektorientiert über sogenannte Entitäten. Eine Entität repräsentiert eine
+Die Datenmodellelierung im Contentfly CMS erfolgt objektorientiert über sogenannte Entitäten. Eine Entität repräsentiert eine
 Datenbank-Tabelle und wird als PHP-Klasse angelegt. Die Verbindung von objektorientierter Entität und der relationalen 
 Datenbank erfolgt über Doctrine ORM (_Object Relational Mapping_). 
 
@@ -10,7 +10,7 @@ Datenbank erfolgt über Doctrine ORM (_Object Relational Mapping_).
     in der Entität soll auf welches Datenbank-Feld von welchem Typ gemappt werden?): 
     XML, YAML oder PHP-Annotations. 
     
-    Im APP-CMS werden nur PHP-Annotations unterstützt. Doctrine-basierte Annotationen müssen dabei mit _@ORM\_ angesprochen werden:
+    Im Contentfly CMS werden nur PHP-Annotations unterstützt. Doctrine-basierte Annotationen müssen dabei mit @ORM\ angesprochen werden:
     
     ````
     @ORM\Table(name="testtabelle")
@@ -22,7 +22,7 @@ Weiterführende Informationen zu Doctrine ORM:
 
 ### Standard-Entitäten
 
-Das APP-CMS bringt bereits einige vordefinierte Entitäten mit, die beispielsweise für die Benutzerverwaltung zuständig sind. 
+Das Contentfly CMS bringt bereits einige vordefinierte Entitäten mit, die beispielsweise für die Benutzerverwaltung zuständig sind. 
 Die Standard-Entitäten finden Sie im Ordner _appcms/areanet/PIM/Entity_
   
 - **User** Benutzer, kann durch PHP-Traits erweitert werden
@@ -32,9 +32,9 @@ Die Standard-Entitäten finden Sie im Ordner _appcms/areanet/PIM/Entity_
 - **PushToken** Token von iOS- und Android-Geräten für Push-Notifications
 - **File** Dateien, kann durch PHP-Traits erweitert werden
 - **Folder** Dateiordner, kann durch PHP-Traits erweitert werden 
-- **Nav** Benutzerdefinierter Navigationsbereich im APP-CMS UI
+- **Nav** Benutzerdefinierter Navigationsbereich im Contentfly CMS UI
 - **NavItem** Benutzerdefinierter Navigationseintrag unterhalt eines Navigationsbereiches im
-  APP-CMS UI
+  Contentfly CMS UI
 - **ThumbnailSetting** Bildgrößen, die automatisch im Dateisystem für
   jede Bilddatei angelegt werden
 
@@ -97,6 +97,8 @@ class Test extends Base
 
 ### Sortierbare Entität
 
+Sortierbare Entitäten erhalten ein zusätzliches (verstecktes) Sortierfeld und können im Contentfly CMS UI per Drag'n Drop sortiert werden.
+
 ```
 <?php
 namespace Custom\Entity;
@@ -119,6 +121,7 @@ class Test extends BaseSortable
 ```
 
 ### Entität mit Baumstruktur
+
 
 ```
 <?php
@@ -146,7 +149,7 @@ class Test extends BaseTree
 
 Die Klassen-Annotationen gelten für die gesamte Entität. Auf Doctrine-Ebene muss hier zwingend die Annotation _@ORM\Entity_ gesetzt und 
 zusätzlich der entsprechende Tabellennamm in der Datenbank definiert werden. Im Folgenden sind die zusätzlichen Konfigurationsmöglichkeiten
-des APP-CMS _@PIM\Config_ aufgeführt:
+des Contentfly CMS _@PIM\Config_ aufgeführt:
 
 ``` hl_lines="6"
 <?php
@@ -165,26 +168,27 @@ Optionen für @PIM\Config:
 
 | Eigenschaft    | Typ    | Standard | Beschreibung                                                                                                                                                                                    |
 |:---------------|:-------|:---------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **label**          | String |          | Name der Entität im APP-CMS UI                                                                                                                                                                  |
+| **label**          | String |          | Name der Entität im Contentfly CMS UI                                                                                                                                                                  |
 | **sortBy**         | String | id       | Eigenschaft, nach er in den Listen im Standard sortiert werden soll                                                                                                                                     |
 | **sortOrder**      | String | ASC      | ASC / DESC                                                                                                                                                                                      |
 | **sortRestrictTo** | String |          | Begrenzt die Sortierung bei _BaseSortable-Entities_ auf die eingetragene Eigenschaft (z.B. "Eigenschaften" sollen nur sortiert werden können, wenn im Filter eine "Kategorie" ausgewählt wurde) |
-| **labelProperty**  | String |          | Feld, das in den APP-CMS UI Formularen anstatt "Objekt ID bearbeiten" angezeigt werden soll                                                                                                     |
-|      **hide**          |    Boolean    |   false       |   Entität wird nicht in der APP-CMS UI Navigation aufgelistet                                                                                                                                                                                              |
-|      **readonly**          |    Boolean    |   false       |   Entität kann im APP-CMS UI nicht bearbeitet werden                                                                                                                                                                                              |
-| **tabs**                 |     JSON-String    |          |  Optional können die Eigenschaften in den Bearbeitungs-Formularen des APP-CMS UI auf mehrere Tabs aufgeteilt werden: _{'tabKey1' : 'Tab Title 1', 'tabKey2' : 'Tab Title 2'}_                                                                                                                                                                                              |
+| **labelProperty**  | String |          | Feld, das in den Contentfly CMS UI Formularen anstatt "Objekt ID bearbeiten" angezeigt werden soll                                                                                                     |
+|      **hide**          |    Boolean    |   false       |   Entität wird nicht in der Contentfly CMS UI Navigation aufgelistet                                                                                                                                                                                              |
+|      **readonly**          |    Boolean    |   false       |   Entität kann im Contentfly CMS UI nicht bearbeitet werden                                                                                                                                                                                              |
+| **tabs**                 |     JSON-String    |          |  Optional können die Eigenschaften in den Bearbeitungs-Formularen des Contentfly CMS UI auf mehrere Tabs aufgeteilt werden: _{'tabKey1' : 'Tab Title 1', 'tabKey2' : 'Tab Title 2'}_  ````                                                                                                                                                                                            |
+| **viewMode**    |     Integer    |     o     |  0 = In der Listenansicht wird ein Löschen- und Bearbeiten-Button dargestellt. / 1 = In der Liste wird der Löschen-Button nicht dargestellt, dafür ein Anzeige-Button, mit dem das Objekt lesend geöffnet/angezeigt werden kann. Der Löschen-Button wird dafür im Bearbeitungsformular links unten angezeigt.|
 
 
 ### Eigenschaften-Annotationen
 
-Anhand den Standard-Doctrine-Annotationen ermitteld das APP-CMS automatisch das passende Formularfeld und Darstellung im APP-CMS UI. 
+Anhand den Standard-Doctrine-Annotationen ermitteld das Contentfly CMS automatisch das passende Formularfeld und Darstellung im Contentfly CMS UI. 
 
 - Typ _string_ = Einzeiliges Textfeld
 - Typ _text_ = Mehrzeiliges Textfeld
 - Typ _boolean_ = Checkbox
 - ...
 
-Dieses Standard-Verhalten kann aber durch spezielle Annotationen des APP-CMS (_@PIM_) ergänzt und/oder angepasst werden.
+Dieses Standard-Verhalten kann aber durch spezielle Annotationen des Contentfly CMS (_@PIM_) ergänzt und/oder angepasst werden.
 
 #### Allgemein
 ``` hl_lines="4"
@@ -199,11 +203,11 @@ Optionen für @PIM\Config:
 
 | Eigenschaft    | Typ     | Standard | Beschreibung                                                                                                                                                                                   |
 |:---------------|:--------|:---------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **label**      | String  |          | Name der Eigenschaft im APP-CMS UI                                                                                                                                                             |
+| **label**      | String  |          | Name der Eigenschaft im Contentfly CMS UI                                                                                                                                                             |
 | **showInList** | Integer |          | Zeigt den Inhalt dieser Eigenschaft in der Auflistung der Entität an der an eingegebenen Position an. Im obigen Beispiel wird die Eigenschaft _titel_ in der Liste in der Spalte 40 angezeigt. |
-| **hide**       | Boolean | false    | Das Formularfeld ist im APP-CMS UI Formular versteckt                                                                                                                                          |
-| **readonly**   | Boolean | false    | Das Formularfeld kann im APP-CMS UI Formular nur gelesen werden                                                                                                                                |
-| **tab**               |   String      |          |       Schlüssel des Tabs, in dem die Eigenschaft optional im APP-CMS UI angezeigt werden soll. Dieser Schlüssel/Key muss in der Klassen-Annotation _@PIM\Config_ in der Option _tabs_ entsprechend konfiguriert sein.                                                                                                                                                                                         |
+| **hide**       | Boolean | false    | Das Formularfeld ist im Contentfly CMS UI Formular versteckt                                                                                                                                          |
+| **readonly**   | Boolean | false    | Das Formularfeld kann im Contentfly CMS UI Formular nur gelesen werden                                                                                                                                |
+| **tab**               |   String      |          |       Schlüssel des Tabs, in dem die Eigenschaft optional im Contentfly CMS UI angezeigt werden soll. Dieser Schlüssel/Key muss in der Klassen-Annotation _@PIM\Config_ in der Option _tabs_ entsprechend konfiguriert sein.                                                                                                                                                                                         |
 | **isFilterable** | Boolean | false    | Die Einträge aus dieser Eigenschaft werden als Filter angezeigt                                                                                                                                |
 | **isDatalist**   | Boolean | false    | Rendert eine Filterliste einer Eigenschaft mit _isFilterable=true_ als Auto-Suggest-Feld dar                                                                                                   |
 | **encoded**      | Boolean | false    | Automatische Verschlüsselung der Inhalte in der Datenbank                                                                                                                                      |
@@ -222,7 +226,7 @@ Optionen für @PIM\Config:
     
 #### Pflichtfeld
 
-Das APP-CMS UI erkennt automatisch, ob eine Eigenschaft einen _NULL_-Wert enthalten darf und stellt das gerenderte Formularfeld entsprechend als Pflichtfeld oder optionales Feld dar. Ob eine Eigenschaft einen _NULL_-Wert enthalten darf wird über die Doctrine-Annotation _@ORM\Column_ konfiguriert
+Das Contentfly CMS UI erkennt automatisch, ob eine Eigenschaft einen _NULL_-Wert enthalten darf und stellt das gerenderte Formularfeld entsprechend als Pflichtfeld oder optionales Feld dar. Ob eine Eigenschaft einen _NULL_-Wert enthalten darf wird über die Doctrine-Annotation _@ORM\Column_ konfiguriert
 
 ```hl_lines="3 9"
 <?php
@@ -244,7 +248,7 @@ protected $pflichtfeld;
 
 #### Feldtypen
 
-Das APP-CMS ermittelt aus den angegebenen Annotations automatisch den entsprechenden Feldtyp, also auch wie das Feld im APP-CMS UI im Formular ausgegeben wird. 
+Das Contentfly CMS ermittelt aus den angegebenen Annotations automatisch den entsprechenden Feldtyp, also auch wie das Feld im Contentfly CMS UI im Formular ausgegeben wird. 
 
 * [Auflistung Standard-Feldtypen](standard-feldtypen.md)
 

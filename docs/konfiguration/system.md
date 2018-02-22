@@ -1,10 +1,10 @@
 # Konfiguration
 
 ## Einfache Konfiguration
-Die grundlegende Konfigurations erfolgt in der Datei custom/config.php
+Die grundlegende Konfiguration erfolgt in der Datei custom/config.php
 und muss dort über ein Objekt der Klasse _\Areanet\PIM\Classes\Config()_
 an _\Areanet\PIM\Classes\Config\Factory_ übergeben werden. Die
-Factory-Klasse stellt dem APP-CMS anhand des Server-Namens die
+Factory-Klasse stellt dem Contentfly CMS anhand des Server-Namens die
 entsprechenden Konfigurationseinstellungen bereit. Damit ist es möglich
 für verschiedene Umgebungen (z.B. Lokal, Testserver, Live-Server,...)
 unterschiedliche Konfigurationseinstellungen vorzuhalten. Der einfachste
@@ -31,6 +31,7 @@ $configDefault->DB_GUID_STRATEGY = true;
 
 $configFactory->setConfig($configDefault);
 ```
+
 ## Multiple Konfigurationen
 Innherhalb der Konfigurationsdatei können beliebig viele Umgebungen (z.B. lokale Entwicklungsumgebung, Testserver, Live-Server, ...) anhand des Server-Names verwaltet werden. Die unterschiedllichen Konfigurationseinstellungen können dabei voneinander erben, so dass nur die Unterschiede zwischen zwei Umgebungen angepasst werden müssen.
 
@@ -64,7 +65,7 @@ An die Klasse _\Areanet\PIM\Classes\Config($serverName, $parentConfig)_ können 
 
 | Parameter   | Beschreibung  |
 |:--------------|:--|
-| **$serverName** |  Server-Name für die die Konfiguration gelten soll. Das APP-CMS ordnet anhand der PHP-Server-Laufzeitvariablen _SERVER_NAME_ die korrekte Konfiguration zu. Wird keine Übereinstimmung gefunden, wir die Standard-Konfiguration geladen. |
+| **$serverName** |  Server-Name für die die Konfiguration gelten soll. Das Contentfly CMS ordnet anhand der PHP-Server-Laufzeitvariablen _SERVER_NAME_ die korrekte Konfiguration zu. Wird keine Übereinstimmung gefunden, wir die Standard-Konfiguration geladen. |
 | **$parentConfig** | Wird _$parentConfig_ angegeben, werden alle Einstellung aus dieser Konfiguration übernommen und können gezielt überschrieben werden.  |
 
 ## Referenz
@@ -72,7 +73,7 @@ An die Klasse _\Areanet\PIM\Classes\Config($serverName, $parentConfig)_ können 
 
 ### Authentifizierung
 
-Das APP-CMS bietet die Möglichkeit die Browser-Verbindung zusätzlich über eine HTTP-Authentifizierung "abzusichern", z.B. für Testumgebungen.
+Das Contentfly CMS bietet die Möglichkeit die Browser-Verbindung zusätzlich über eine HTTP-Authentifizierung "abzusichern", z.B. für Testumgebungen.
 
 | Eigenschaft         | Typ    | Standard | Beschreibung                                                                              |
 |:--------------------|:-------|:---------|:------------------------------------------------------------------------------------------|
@@ -94,7 +95,7 @@ Das APP-CMS bietet die Möglichkeit die Browser-Verbindung zusätzlich über ein
 | **APP_TIMEZONE**            | String  | Europe/Berlin | Standard-PHP-Zeitzone                                                                                                                                                           |
 | **APP_ENABLE_XSENDFILE**        | Boolean | false         | Aktivier x_sendfile (Apache/nginx-Modul) für die Auslieferung von Dateien über _file/get/ID_. Kann mit zusätzlicher Konfigurations-/Anpassungsaufwand am Server verbunden sein. |
 
-### CORS 
+### CORS UND SECURITY
 
 Cross-Origin Resource Sharing: Erlaubt den Zugriff von Webclients über andere Domains.
 
@@ -105,6 +106,7 @@ Cross-Origin Resource Sharing: Erlaubt den Zugriff von Webclients über andere D
 | **APP_ALLOW_METHODS**       | String | post,get          | Erlaubte HTTP-Methoden für einen CORS-Request                                                      |
 | **APP_ALLOW_HEADERS**       | String | content-type, x-xsrf-token          | Erlaubte HTTP-Header für einen CORS-Reques                                                     |
 | **APP_MAX_AGE**       | Integer | 0         | Zeitdauer in der Prefligth-Request bei CORS-Anfragen gecached werden.                                                     |
+| **APP_CS_POLICY**       | String | default-src 'self' 'unsafe-inline' 'unsafe-eval';         | HTTP-Header Content-Security-Policy                                                     |
 
 
 ### Dateien
@@ -134,10 +136,10 @@ Cross-Origin Resource Sharing: Erlaubt den Zugriff von Webclients über andere D
 
 | Eigenschaft                            | Typ     | Standard              | Beschreibung                                                                                                                                                                                                                                                                                                                                                                          |
 |:---------------------------------------|:--------|:----------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **FRONTEND_TITLE**                     | String  | APP-CMS               | Zeichenkette, die als Titel angezeigt werden soll                                                                                                                                                                                                                                                                                                                                     |
-| **FRONTEND_WELCOME**                   | String  | Willkommen im APP-CMS | Zeichenkette, die als Willkommensseite nach dem Login angezeigt werden soll                                                                                                                                                                                                                                                                                                           |
-| **FRONTEND_URL**                       | String  | /                     | Virtueller Pfad, unter dem das APP-CMS über eine URL erreichbar sein soll. Im Standard ist das Login des APP-CMS unter der installierten Domain direkt zu erreichen, z.B. _www.das-app-cms.de_. Mit der Angabe von _admin_ wäre das Login/Frontend unter _www.das-app-cms.de/admin_ zu erreichen. Somit könnte unter _www.das-app-cms.de/_ eine individuelle Programmierung erfolgen. |
-| **FRONTEND_CUSTOM_NAVIGATION**               | Boolean | false                 | Ist der Wert auf _true_, kann über das APP-CMS-UI eine benutzerdefinierte Navigation für die Entitäten erstellt werden.                                                                                                                                                                                                                                                                       |
+| **FRONTEND_TITLE**                     | String  | Contentfly CMS               | Zeichenkette, die als Titel angezeigt werden soll                                                                                                                                                                                                                                                                                                                                     |
+| **FRONTEND_WELCOME**                   | String  | Willkommen im Contentfly CMS | Zeichenkette, die als Willkommensseite nach dem Login angezeigt werden soll                                                                                                                                                                                                                                                                                                           |
+| **FRONTEND_URL**                       | String  | /                     | Virtueller Pfad, unter dem das Contentfly CMS über eine URL erreichbar sein soll. Im Standard ist das Login des Contentfly CMS unter der installierten Domain direkt zu erreichen, z.B. _www.das-Contentfly CMS.de_. Mit der Angabe von _admin_ wäre das Login/Frontend unter _www.das-Contentfly CMS.de/admin_ zu erreichen. Somit könnte unter _www.das-Contentfly CMS.de/_ eine individuelle Programmierung erfolgen. |
+| **FRONTEND_CUSTOM_NAVIGATION**               | Boolean | false                 | Ist der Wert auf _true_, kann über das Contentfly CMS-UI eine benutzerdefinierte Navigation für die Entitäten erstellt werden.                                                                                                                                                                                                                                                                       |
 | **FRONTEND_CUSTOM_LOGO**               | Boolean | false                 | Ist der Wert auf _true_, wird im Frontend das Logo vom Pfad _/custom/Frontend/ui/default/img/logo.png_ geladen.                                                                                                                                                                                                                                                                       |
 | **FRONTEND_CUSTOM_LOGIN_BG**           | Boolean | false                 | Ist der Wert auf _true_, wird im Loginfenster des Frontends das Hintergrundbild vom Pfad _/custom/Frontend/ui/default/img/bg_login.jpg_ geladen.                                                                                                                                                                                                                                      |
 | **FRONTEND_FORM_IMAGE_SQUARE_PREVIEW** | Boolean | true                  | Alle Vorschaubilder in Listen und Formularen werden quadratisch zugeschnitten. Bei _false_ werden die original Dimensionen beibehalten                                                                                                                                                                                                                                                |
