@@ -4,12 +4,12 @@
 
 ###  Headless CMS
 
-Das Contentfly CMS wurde ursprünglich als **Headless CMS** konzipiert. Also als Content Management System, 
-dass ohne eigene Oberfläche auskommt und lediglich für die Datenhaltung zuständig ist. Da allerdings 
-der einfache Zugriff auf die Daten elementar wichtig ist, haben wir auf Basis der Schnitstelle das 
+Das Contentfly CMS wurde ursprünglich als **Headless CMS** konzipiert. Also als Content Management System,
+dass ohne eigene Oberfläche auskommt und lediglich für die Datenhaltung zuständig ist. Da allerdings
+der einfache Zugriff auf die Daten elementar wichtig ist, haben wir auf Basis der Schnitstelle das
 Contentfly CMS UI ergänzt.
 
-Das Contentfly CMS ist damit nicht mehr wirklich "headless", die API bleibt aber die zentrale Einheit des Contentfly CMS. 
+Das Contentfly CMS ist damit nicht mehr wirklich "headless", die API bleibt aber die zentrale Einheit des Contentfly CMS.
 Das Contentfly CMS ist ein **API-zentriertes Content Management System**.
 
 ###  Datenformat
@@ -63,10 +63,10 @@ hat eine Laufzeit (_Token-Timeout_). Diese kann über das Contentfly CMS UI übe
 
 Alternativ kann über das Contentfly CMS UI auch ein fester Token für z.b. API-Aufrufe unter _Administration/Einstellungen_ aus einer App angelegt werden:
 
-![Token ](../images/screen_token.png)
+![Token ](https://github.com/area-net-gmbh/contently-cms-doc/raw/master/docs/images/screen_token.png)
 
 Jeder Token muss einem Benutzer zugeordnet werden. Das Feld _Referrer_ dient als Titel und wird derzeit nicht weiter ausgewertet.
-        
+
 ## API-Dokumentation
 
 Eine ausführliche API-Dokumentation ist als Referenz unter folgendem Link einzusehen:
@@ -75,13 +75,13 @@ Eine ausführliche API-Dokumentation ist als Referenz unter folgendem Link einzu
 
 ## Performance-Tipps
 
-Insbesondere beim Abruf über die List-Methode _api/list_ kann es zu Performance-Problemen kommen, da gegebenfalls sehr viele Daten geladen und zurückgegeben werden müssen. 
+Insbesondere beim Abruf über die List-Methode _api/list_ kann es zu Performance-Problemen kommen, da gegebenfalls sehr viele Daten geladen und zurückgegeben werden müssen.
 Folgende Tipps sollen bei der Vermeidung solcher Performance-Probleme vermeiden.
 
 ### Abruf über flatten=true
 
-In der Regel werden alle verknüpften Objekte (_join, multijoin_) direkt über die API zurückgegeben. Damit werden mehrere API-Aufrufe vermieden. Bei vielen (verknüpften) Objekten 
-kann dies aber zu gewissen Performance-Problemen führen. Zum Einen müssen serverseitig gegebenfalls sehr viele Datenbankaufrufe durchgeführt werden, zum anderen steigt der Aufwand um die Rückgabe 
+In der Regel werden alle verknüpften Objekte (_join, multijoin_) direkt über die API zurückgegeben. Damit werden mehrere API-Aufrufe vermieden. Bei vielen (verknüpften) Objekten
+kann dies aber zu gewissen Performance-Problemen führen. Zum Einen müssen serverseitig gegebenfalls sehr viele Datenbankaufrufe durchgeführt werden, zum anderen steigt der Aufwand um die Rückgabe
 entsprechend zu parsen und in das JSON-Format umzuwandeln.
 
 Verwenden Sie daher wenn möglich den Parameter _flatten=true_, damit werden nur die ID's und nicht die kompletten Datensätze der verknüpften Objekte zurückgegeben.
@@ -113,7 +113,7 @@ REQUEST:
 
 ### Server-Komprimierung verwenden
 
-Verwenden und konfigurieren Sie wenn möglich die serverseitige Komprimierung der Daten. 
+Verwenden und konfigurieren Sie wenn möglich die serverseitige Komprimierung der Daten.
 
 **Apache-Komprimierung in der .htaccess:**
 ```
@@ -133,11 +133,11 @@ Verwenden und konfigurieren Sie wenn möglich die serverseitige Komprimierung de
      AddOutputFilterByType DEFLATE image/x-icon
      AddOutputFilterByType DEFLATE application/json
  </IfModule>
-``` 
+```
 
 ### Doctrine-Caching verwenden
 
-Beachten Sie, dass im Debug-Modus kein Caching für Doctrine-Abfragen verwendet wird. Stellen Sie daher im Produktivbetrieb den Debug-Modus ab. Im Standard verwendet das Contentfly CMS das Dateisystem für das Caching, 
+Beachten Sie, dass im Debug-Modus kein Caching für Doctrine-Abfragen verwendet wird. Stellen Sie daher im Produktivbetrieb den Debug-Modus ab. Im Standard verwendet das Contentfly CMS das Dateisystem für das Caching,
 installieren Sie wenn möglich auf dem Server APC[^1] oder Memcached[^2].
 
 **_custom/config.php_**
@@ -188,15 +188,15 @@ GET: file/get/ID
 
 !!! Note "API-Dokumentation"
     Weitere mögliche Datei-Abrufe finden Sie in der externen [API-Dokumentation](/doku/api/1.4.0).
-    
+
 ### Abruf per readfile()
 
-Im Standard werden die außerhalb des Webserver-Verzeichnis gespeicherten Dateien per PHP-Funktion _readfile()_ zurückgegeben. Dies kann insbesondere bei größeren Dateien oder 
+Im Standard werden die außerhalb des Webserver-Verzeichnis gespeicherten Dateien per PHP-Funktion _readfile()_ zurückgegeben. Dies kann insbesondere bei größeren Dateien oder
 vielen Server-Zugriffen zu Performance-Problemen führen. Verwenden Sie in diesem Fall das Apache-Modul _x_sendfile_
 
 ### Abruf per x_sendfile
 
-Mit dem Apache-Webserver haben Sie die Möglichkeit anstatt mit _readfile()_ die Dateien über das Modul _x_sendfile_ zurückzugeben. Sie müssen dazu das externe Modul _x_sendfile_ [^3] 
+Mit dem Apache-Webserver haben Sie die Möglichkeit anstatt mit _readfile()_ die Dateien über das Modul _x_sendfile_ zurückzugeben. Sie müssen dazu das externe Modul _x_sendfile_ [^3]
 auf Ihrem Server installieren. Um das Modul zu aktivieren, muss dieses in der Apache- oder VirtualHost-Konfigurationsdatei entsprechend eingerichtet werden.
 
 ```

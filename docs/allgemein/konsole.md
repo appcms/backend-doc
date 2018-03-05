@@ -31,7 +31,7 @@ whereis php
 
 ## Konfiguration
 
-Wird das Contentfly CMS über den Browser aufgerufen, ermittelt das System über die Umgebungsvariable _SERVER_NAME_ automatisch die passende [Konfiguration](../entwicklung/setup.md#multiple-konfigurationen). Auf der Konsole kann/muss die Umgebungsvariable _SERVER_NAME_ manuell gesetzt werden:
+Wird das Contentfly CMS über den Browser aufgerufen, ermittelt das System über die Umgebungsvariable _SERVER_NAME_ automatisch die passende [Konfiguration](../konfiguration/system.md#multiple-konfigurationen). Auf der Konsole kann/muss die Umgebungsvariable _SERVER_NAME_ manuell gesetzt werden:
 
 ```
 #!/bin/bash

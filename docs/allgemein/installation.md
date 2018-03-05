@@ -8,6 +8,9 @@ Laden Sie sich das gewünschte Paket des Contentfly CMS unter <https://www.conte
 
 **(2) Webserver (Virtual Host) DocumentRoot auf _appcms/public_ stellen**
 
+Oder alternativ einen benutzerdefinierten DocumentRoot-Ordner erstellen
+\- siehe nächstes Kapitel.
+
 **(3) URL/Host im Browser aufrufen und Installations-Hinweisen folgen**
 
 Nach der Installation können Sie sich mit Benutzernamen=admin und Passwort=admin am Contentfly CMS anmelden.
@@ -20,7 +23,63 @@ Nach der Installation können Sie sich mit Benutzernamen=admin und Passwort=admi
     Führen Sie in diesem Fall bitte aus dem nächsten Kapitel _Manuelle Installation/Kompilierung aus Git_ die Schritte (3), (4) und (5) aus. Danach müsste das
     Contentfly CMS im Browser korrekt funktionieren.
 
-   
+## Benutzerdefinierter DocumentRoot
+
+Im Standard sollte der DocumentRoot des Webservers auf den Ordner _appcms/public_ gestellt werden. Dies kann allerdings zu Problemen führen, wenn z.B.
+
+- benutzerdefinierte Angaben in der htaccess-Datei
+- benutzerdefinierte Anwendungen in einem eigenen Ordner (z.B. PhpMyAdmin)
+- benutzerdefinierte PHP-Skripte
+
+benötigt werden. Diese könnten bei einem Contentfly CMS Update überschrieben werden. Um einen benutzerdefinierten DocumentRoot zu verwenden, legen Sie auf Ihrem Webserver
+an beliebiger Stelle einen Ordner mit einer _index.php_ mit folgendem Inhalt an:
+
+**public/index.php**
+```
+<?php
+require_once '../appcms/bootstrap-web.php';
+```
+
+!!! note "bootstrap-web.php"
+    Die einzige Datei die Sie einbinden müssen, ist die _bootstrap-web.php_ aus
+    dem _appcms_-Ordner. Darüber hinaus können Sie Ihre eigene _index.php_ um
+    weitere PHP-Befehle (z.B. Error-Handling) ergänzen.
+
+Im Falle eines Apache-Webservers vergessen Sie nicht die htaccess-Datei in Ihrem benutzerdefinierten DocumentRoot anzulegen.
+
+**public/.htaccess**
+```
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+<IfModule mod_deflate.c>
+     AddOutputFilterByType DEFLATE text/css
+     AddOutputFilterByType DEFLATE text/javascript
+     AddOutputFilterByType DEFLATE application/x-javascript
+     AddOutputFilterByType DEFLATE application/javascript
+     AddOutputFilterByType DEFLATE text/x-component
+     AddOutputFilterByType DEFLATE text/html
+     AddOutputFilterByType DEFLATE text/richtext
+     AddOutputFilterByType DEFLATE image/svg+xml
+     AddOutputFilterByType DEFLATE text/plain
+     AddOutputFilterByType DEFLATE text/xsd
+     AddOutputFilterByType DEFLATE text/xsl
+     AddOutputFilterByType DEFLATE text/xml
+     AddOutputFilterByType DEFLATE image/x-icon
+     AddOutputFilterByType DEFLATE application/json
+ </IfModule>
+```
+
+!!! tip "Symlinks _custom/Frontend_ und _ui/default_"
+    Die für das Contentfly CMS User Interface benötigten Ordner _custom/Frontend_ und _ui/default_
+    werden als symbolische Links zur Laufzeit automatisch vom System erstellt. Achten Sie darauf, dass
+    Ihr Webserver die Verfolgung von symbolischen Links unterstützt.
 
 ## Manuelle Installation/Kompilierung aus Git
 

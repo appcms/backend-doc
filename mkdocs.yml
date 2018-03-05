@@ -31,12 +31,19 @@ pages:
     - Erste Schritte: 'allgemein/ersteschritte.md'
     - Architektur: 'allgemein/architektur.md'
     - Konsolenbefehle: 'allgemein/konsole.md'
-    - Schnittstelle/API: 'allgemein/schnittstelle.md'
 - Konfiguration:
     - System: 'konfiguration/system.md'
     - Entitäten: 'konfiguration/entitaeten.md'
     - Standard-Feldtypen: 'konfiguration/standard-feldtypen.md'
     - Benutzerdefinierte Feldtypen: 'konfiguration/benutzerdefinierte-feldtypen.md'
+- Schnittstelle / API:
+    - Einführung: 'schnittstelle/einfuehrung.md'
+    - api/query: 'schnittstelle/query.md'
+    - api/list: 'schnittstelle/list.md'
+    - api/single: 'schnittstelle/single.md'
+    - api/insert: 'schnittstelle/insert.md'
+    - api/update: 'schnittstelle/update.md'
+    - api/delete: 'schnittstelle/delete.md'
 - Anpassung Backend:
     - Events und Hooks: 'backend/events-hooks.md'
     - Erweiterung Standard-Entitäten: 'backend/standard-entitaeten.md'

@@ -177,7 +177,7 @@ Herzlichen Glückwunsch, Sie haben die ersten erfolgreichen Schritte mit dem Con
     }
     ```
     
-    Mehr Informationen zur Arbeit mit der [Schnittstelle/API](schnittstelle.md).
+    Mehr Informationen zur Arbeit mit der [Schnittstelle/API](../schnittstelle/einfuehrung.md).
 
 
 

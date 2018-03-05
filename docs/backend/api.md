@@ -65,7 +65,7 @@ $controllerProvider = $app['routeManager']->mount('custom', 'Custom\Controller\T
     
     **Beachten Sie, dass alle aufrufbaren Aktionen im Controller aber über die folgenden Schritten noch manuell konfiguriert werden müssen!**
     
-    **Die "Basic-Route" $baseRoute muss eindeutig sein!
+    Die Basis-Route $baseRoute muss eindeutig sein!
 
 ### Controller-Provider
 
@@ -139,7 +139,7 @@ $app['routeManager']->mount('custom', 'Custom\Controller\TestController')
 
 Die benutzerdefinierte Schnittstellen sind damit wie folgt zu erreichen:
 
-- www.domain.de/custom/secure _mit gesetztem X-XSRF-TOKEN Header-Token_
+- www.domain.de/custom/secure _mit gesetztem APPCMS-TOKEN Header-Token_
 - www.domain.de/custom/test
 - www.domain.de/hallo/peter
 
