@@ -14,14 +14,14 @@ die entsprechenden Autoload-Skripte. Sie können die installierte Bibliothek im 
 **Beispiel custom/app.php**
 ```
 <?php
-$app['mailer'] = $app->share(function (\Silex\Application $app) {
+$app['mailer'] = function (\Silex\Application $app) {
 
     $mailer = new \PHPMailer();
     
     ...
 
     return $mailer;
-});
+};
 ```
 
 [^1]: https://getcomposer.org

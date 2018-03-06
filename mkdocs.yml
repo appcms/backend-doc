@@ -3,13 +3,19 @@ site_favicon: 'images/favicon.ico'
 google_analytics:
   - 'UA-19350837-3'
   - 'auto'
-theme: 'material'
-version: '1.4.0'
-extra:
+theme:
+  name: 'material'
+  language: 'de'
+  feature:
+    tabs: false
+  favicon: 'images/favicon.ico'
+  logo: 'images/appcms_logo.png'
   palette:
     primary: 'red'
     accent: 'red'
-  logo: 'images/appcms_logo.png'
+version: '1.4.0'
+extra:
+
   social:
     - type: 'github'
       link: 'https://github.com/area-net-gmbh/contentfly-cms'
@@ -59,3 +65,13 @@ pages:
   - Doctrine Repositories: 'database/repositories.md'
   - Doctrine DQL: 'database/dql.md'
   - Doctrine DBAL: 'database/dbal.md'
+- Bedienung:
+  - Login / Logout: 'bedienung/login.md'
+  - Objekte verwalten: 'bedienung/objekte.md'
+  - Medien verwalten: 'bedienung/medien.md'
+- Administration:
+  - Einführung: 'administration/einfuehrung.md'
+  - Bildgrößen: 'administration/bildgroessen.md'
+  - Protokollierung: 'administration/protokollierung.md'
+  - Benutzerverwaltung: 'administration/benutzerverwaltung.md'
+  - Einstellungen: 'administration/einstellungen.md'
