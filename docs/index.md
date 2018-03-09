@@ -32,7 +32,7 @@ Für die Entwicklung von Apps mit dem Contentfly Framework sind folgende Kentnis
 
 ## Das Contentfly CMS
 
-Mit dem Server können serverseitig beliebige Inhalte gespeichert und verwaltet werden. Der Server kann letztendlich auch losgelöst von mobilen Apps betrieben werden. Über eine Schnittstelle kann auf alle auf dem Server gespeicherten Daten zugegriffen werden. Damit kann der Server auch zum Beispiel als zusätzliches PIM (Product Information Managament) für eine Webseite in TYPO3 oder Wordpress eingesetzt werden.
+Mit dem CMS können serverseitig beliebige Inhalte gespeichert und verwaltet werden. Der Server kann letztendlich auch losgelöst von mobilen Apps betrieben werden. Über eine Schnittstelle kann auf alle auf dem Server gespeicherten Daten zugegriffen werden. Damit kann der Server auch zum Beispiel als zusätzliches PIM (Product Information Managament) für eine Webseite in TYPO3 oder Wordpress eingesetzt werden.
 
 ##  Technologien
 
