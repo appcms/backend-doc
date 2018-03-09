@@ -8,8 +8,8 @@ theme:
   language: 'de'
   feature:
     tabs: false
-  favicon: 'images/favicon.ico'
-  logo: 'images/appcms_logo.png'
+  favicon: 'images/contentfly_favicon.ico'
+  logo: 'images/contentfly_logo.png'
   palette:
     primary: 'red'
     accent: 'red'
