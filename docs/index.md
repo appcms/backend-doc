@@ -77,7 +77,6 @@ AREA-NET GmbH
 - http://www.app-agentur-bw.de
 - http://www.contentfly-cms.de
 
-
 **Geschäftsführer**
 Gaugler Stephan, Köller Holger, Schmid Markus
 
