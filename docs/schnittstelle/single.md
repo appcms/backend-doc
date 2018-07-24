@@ -72,4 +72,4 @@ RESPONSE
 ## Referenz
 
 !!! tip "API-Referenz"
-    [www.contentfly-cms.de/docs/api/1.4.0#api-Objekte-List](http://www.contentfly-cms.de/docs/api/1.4.0#api-Objekte-List)
+    [www.contentfly-cms.de/docs/api/1.4#api-Objekte-List](http://www.contentfly-cms.de/docs/api/1.4#api-Objekte-List)

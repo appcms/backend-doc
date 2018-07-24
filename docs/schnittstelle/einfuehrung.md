@@ -71,7 +71,7 @@ Jeder Token muss einem Benutzer zugeordnet werden. Das Feld _Referrer_ dient als
 
 Eine ausführliche API-Dokumentation ist als Referenz unter folgendem Link einzusehen:
 
-- [www.contentfly-cms.de/docs/api/1.4.0](http://www.contentfly-cms.de/docs/api/1.4.0)
+- [www.contentfly-cms.de/docs/api/1.4](http://www.contentfly-cms.de/docs/api/1.4)
 
 ## Performance-Tipps
 
@@ -198,7 +198,7 @@ vielen Server-Zugriffen zu Performance-Problemen führen. Verwenden Sie in diese
 
 Mit dem Apache-Webserver haben Sie die Möglichkeit anstatt mit _readfile()_ die Dateien über das Modul _x_sendfile_ zurückzugeben. Sie müssen dazu das externe Modul _x_sendfile_ [^3]
 auf Ihrem Server installieren. Um das Modul zu aktivieren, muss dieses in der Apache- oder VirtualHost-Konfigurationsdatei entsprechend eingerichtet werden.
-
+x
 ```
 <VirtualHost *:80>
     DocumentRoot /var/www/appcms/public

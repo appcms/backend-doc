@@ -38,4 +38,4 @@ REQUEST:
 ## Referenz
 
 !!! tip "API-Referenz"
-    [www.contentfly-cms.de/docs/api/1.4.0#api-Objekte-Update](http://www.contentfly-cms.de/docs/api/1.4.0#api-Objekte-Update)
+    [www.contentfly-cms.de/docs/api/1.4#api-Objekte-Update](http://www.contentfly-cms.de/docs/api/1.4#api-Objekte-Update)

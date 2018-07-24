@@ -95,4 +95,4 @@ REQUEST:
 ## Referenz
 
 !!! tip "API-Referenz"
-    [www.contentfly-cms.de/docs/api/1.4.0#api-Objekte-Query](http://www.contentfly-cms.de/docs/api/1.4.0#api-Objekte-Query)
+    [www.contentfly-cms.de/docs/api/1.4#api-Objekte-Query](http://www.contentfly-cms.de/docs/api/1.4#api-Objekte-Query)

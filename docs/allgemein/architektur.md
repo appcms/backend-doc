@@ -55,7 +55,7 @@ von der letztendlichen Ausgabe. Alle Daten und Inhalte sind über eine Schnittst
 Der zentrale Code für die API steckt in der Datei _appcms/areanet/PIM/Controller/ApiController.php_
 
 - [Nutzung der API](../schnittstelle/einfuehrung.md)
-- [API-Dokumentation](http://www.contentfly-cms.de/docs/api/1.4.0)
+- [API-Dokumentation](http://www.contentfly-cms.de/docs/api/1.4)
 
 ### Weitere Komponenten
 

@@ -21,4 +21,4 @@ REQUEST:
 ## Referenz
 
 !!! tip "API-Referenz"
-    [www.contentfly-cms.de/docs/api/1.4.0#api-Objekte-Delete](http://www.contentfly-cms.de/docs/api/1.4.0#api-Objekte-Delete)
+    [www.contentfly-cms.de/docs/api/1.4#api-Objekte-Delete](http://www.contentfly-cms.de/docs/api/1.4#api-Objekte-Delete)
