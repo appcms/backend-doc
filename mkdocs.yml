@@ -13,9 +13,8 @@ theme:
   palette:
     primary: 'red'
     accent: 'red'
-version: '1.4.0'
+version: '1.4'
 extra:
-
   social:
     - type: 'github'
       link: 'https://github.com/area-net-gmbh/contentfly-cms'

@@ -187,7 +187,7 @@ GET: file/get/ID
 ```
 
 !!! Note "API-Dokumentation"
-    Weitere mögliche Datei-Abrufe finden Sie in der externen [API-Dokumentation](/doku/api/1.4.0).
+    Weitere mögliche Datei-Abrufe finden Sie in der externen [API-Dokumentation](/doku/api/1.4).
 
 ### Abruf per readfile()
 
