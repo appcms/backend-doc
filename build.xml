@@ -4,7 +4,7 @@
     <property environment="env"/>
 
     <!-- BUILD -->
-    <target name="main" depends="generate"/>
+    <target name="main" depends="generate,deploy"/>
 
     <target name="generate" description="Dokumentation wird erstellt..." >
         <exec executable="mkdocs" dir="./">
