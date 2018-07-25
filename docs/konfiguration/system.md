@@ -94,6 +94,7 @@ Das Contentfly CMS bietet die Möglichkeit die Browser-Verbindung zusätzlich ü
 | **APP_MAILFROM**            | String  |               | Standard-E-Mail-Adresse für eventuellen PHP-Mailversand                                                                                                                         |
 | **APP_TIMEZONE**            | String  | Europe/Berlin | Standard-PHP-Zeitzone                                                                                                                                                           |
 | **APP_ENABLE_XSENDFILE**        | Boolean | false         | Aktivier x_sendfile (Apache/nginx-Modul) für die Auslieferung von Dateien über _file/get/ID_. Kann mit zusätzlicher Konfigurations-/Anpassungsaufwand am Server verbunden sein. |
+| **APP_AUTOGENERATE_PROXIES**        | Boolean | true         | Doctrine ORM erstellt Proxy-Klassen automatisch zur Laufzeit, ansonsten müssen die Proxy-Klassen manuell per Konsole erstellt werden.  |
 
 ### CORS UND SECURITY
 

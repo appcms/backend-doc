@@ -166,6 +166,32 @@ $configProduction->APP_CACHE_DRIVER = 'memcached';
 $configFactory->setConfig($configProduction);
 ```
 
+### Automatische Generierung der Proxy-Klassen durch Doctrine deaktvieren
+
+Im Standard werden bei jedem Aufruf im Hintergrund aus den konfigurierten Entitäten von Doctrine automatisch sogenannte Proxy-Klassen generiert. Für eine bessere Performance sollte diese Funktion auf Produktiv-Umgebungen deaktiviert werden:
+
+**_custom/config.php_**
+```
+<?php
+
+$configProduction->APP_AUTOGENERATE_PROXIES = false; 
+
+```
+
+**Manuelle Generierung notwendig**
+
+Nach der Umstellung müssen bei jeder Änderung in den Entitäten (oder nach einem Deployment) die Proxy-Klassen über folgenden Konsolen-Befehl neu generiert werden:
+
+**_appcms/_**
+```
+
+php console.php orm:generate:proxies
+
+```
+
+!!! tip "Hinweis Windows-Server"
+    Unter Windows sollte die automatische Generierung immer deaktiviert werden, da es ansonsten zu temporären Zugriffsproblemen kommen kann.
+
 ### Schema-Cache aktivieren
 
 Vergessen Sie im Produktivmodus nicht, den Schema-Cache zu aktivieren - da die Erstellung des Schemas relativ aufwendig ist.

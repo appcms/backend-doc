@@ -59,6 +59,10 @@ Mit dem CMS können serverseitig beliebige Inhalte gespeichert und verwaltet wer
 - MySQL 
     - mindestens Version 5.5
 
+## Performance-Tipps
+
+Beachten sie bitte auf die Tipps zur [Performance-Optimerung](schnittstelle/einfuehrung.md#performance-tipps).
+
 ## Lizenz
 
 Die Contentfly Plattform ist unter eine dualen Lizenz (AGPL v3 und properitär) verfügbar. Die genauen Lizenzbedingungen sind in der Datei _licence.txt_ zu finden.
